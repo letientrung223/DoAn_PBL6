@@ -24,7 +24,9 @@ export default function Router() {
         style: {
           backgroundColor: '#EE8822',
           borderTopColor: "transparent",
+          elevation: 0,
         },
+        labelShown: false, // khong the an ten tabbar nhi??
         
         activeTinColor: "#C02E2E",
         tabStyle: {

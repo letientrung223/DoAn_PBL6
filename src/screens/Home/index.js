@@ -1,20 +1,15 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, SafeAreaView } from "react-native";
+import { View, Text, StyleSheet, Image, SafeAreaView,Dimensions } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import asset from "../../../assets/asset";
 import COLORS from "../../../src/consts/colors";
-import {
-  FlatList,
-  ScrollView, 
-  TextInput,
-  TouchableHighlight,
-  TouchableOpacity,
-} from "react-native-gesture-handler";
+import {FlatList,ScrollView,TextInput,TouchableHighlight,TouchableOpacity,} from "react-native-gesture-handler";
 import categories from "../../../src/consts/categories";
 
 const Home = () => {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
-  const ListCategory = () => {
+
+  const ListCategories = () => {
     return (
       <ScrollView
         horizontal
@@ -24,23 +19,40 @@ const Home = () => {
           <TouchableOpacity
             key={index}
             activeOpacity={0.8}
-            //onPress={() => setSelectedCategoryIndex(index)}
-          >
+            onPress={() => setSelectedCategoryIndex(index)}>
             <View
               style={{
                 backgroundColor:
                   selectedCategoryIndex == index
-                    ? COLORS.primary
-                    : COLORS.secondary,
+                    ? COLORS.grey
+                    : COLORS.grey_light,
                 ...styles.categoryBtn,
               }}>
-                
+              <View style={styles.categoryBtnImgCon}>
+                <Image
+                  source={category.image}
+                  style={{height: 30, width: 30, resizeMode: 'cover',borderRadius: 10 }}
+                />
+              </View>
+              <Text
+                style={{
+                  fontSize: 15,
+                  fontWeight: 'bold',
+                  marginLeft: 10,
+                  color:
+                    selectedCategoryIndex == index
+                      ? COLORS.white
+                      : COLORS.light,
+                }}>
+                {category.name}
+              </Text>
             </View>
           </TouchableOpacity>
         ))}
       </ScrollView>
     );
   };
+  // ====================================================
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       {/* Phan Logo va User */}
@@ -74,8 +86,9 @@ const Home = () => {
       </View>
       {/* Phan List Categories */}
       <View>
-        <ListCategory/>
+        <ListCategories/>
       </View>
+      {/*Load san pham len */}
     </SafeAreaView>
   );
 };
@@ -111,27 +124,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  categoriesListContainer: {
-    paddingVertical: 30,
-    alignItems: "center",
+  categoriesListContainer:{
+    paddingVertical: 10,
+    alignItems: 'center',
     paddingHorizontal: 20,
   },
-  categoryBtn: {
+  categoryBtn:{
     height: 45,
-    width: 120,
+    width: 150,
     marginRight: 7,
     borderRadius: 30,
-    alignItems: "center",
+    alignItems: 'center',
     paddingHorizontal: 5,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
-  cateBtnImg: {
+  categoryBtnImgCon: {
     height: 35,
     width: 35,
     backgroundColor: COLORS.white,
     borderRadius: 30,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
+
+
 });
 export default Home;
