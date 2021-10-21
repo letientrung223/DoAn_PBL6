@@ -1,6 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome } from "@expo/vector-icons";
+import { createStackNavigator } from '@react-navigation/stack';
 
 import Cart from "../screens/Cart";
 import Menu from "../screens/Menu";
@@ -9,7 +10,18 @@ import Home from "../screens/Home";
 import User from "../screens/User";
 import SignInScreen from "../screens/SignInScreen";
 import SignUpScreen from "../screens/SignUpScreen";
+
 const Tab = createBottomTabNavigator();
+
+const Stack = createStackNavigator();
+function SignInSignUp(){
+  return(
+    <Stack.Navigator screenOptions={{headerShown:false}}>
+      <Stack.Screen name="SignInScreen" component={SignInScreen}/>
+      <Stack.Screen name="SignUpScreen" component={SignUpScreen}/>
+    </Stack.Navigator>
+  );
+}
 
 export default function Router() {
   return (
@@ -74,10 +86,10 @@ export default function Router() {
           ),
         }}
       />
-      {/* Check login hay chua de chuyen Dashboard */}
+      {/* !isLogin?SignInSignUp?DashBoard */}
       <Tab.Screen
         name="Profile"
-        component={SignInScreen}
+        component={SignInSignUp}
         options={{
           tabBarIcon: ({ size, color }) => (
             <FontAwesome name="user" size={size} color={color} />

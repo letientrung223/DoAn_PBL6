@@ -6,11 +6,13 @@ import {
   StyleSheet,
   useWindowDimensions,
 } from "react-native";
-
+import {TouchableOpacity} from "react-native-gesture-handler";
+import 'react-native-gesture-handler';
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import asset from "../../../assets/asset";
-const SignInScreen = () => {
+import COLORS from "../../consts/colors";
+const SignInScreen = ({navigation}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const onSignInPressed = () => {
@@ -22,11 +24,8 @@ const SignInScreen = () => {
   const onSignInWithFBPressed = () => {
     console.warn("Sign in with Fb");
   };
-  const onFogotPassWordPressed = () => {
-    console.warn("Fogot Password");
-  };
-  const onSignUpPressed = () => {
-    console.warn("Sign Up");
+  const onForgotPassWordPressed = () => {
+    console.warn("Forgot Password");
   };
   return (
     <View style={styles.root}>
@@ -49,8 +48,8 @@ const SignInScreen = () => {
 
       <CustomButton text="Sign in" onPress={onSignInPressed} />
       <CustomButton
-        text="Fogot Password?"
-        onPress={onFogotPassWordPressed}
+        text="Forgot Password?"
+        onPress={onForgotPassWordPressed}
         type="TERTIARY"
       />
 
@@ -70,11 +69,23 @@ const SignInScreen = () => {
         fgColor="#3504FA"
         onPress={onSignInWithFBPressed}
       />
-      <CustomButton
-        text="Don’t have any account? Sign up"
-        onPress={onSignUpPressed}
-        type="TERTIARY"
-      />
+      <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'flex-end',
+            justifyContent: 'center',
+            marginTop: 40,
+            marginBottom: 20,
+          }}>
+          <Text style={{color: COLORS.grey, fontWeight: 'bold'}}>
+            Don't have an account? 
+          </Text>
+          <TouchableOpacity onPress={() => navigation.navigate('SignUpScreen')}>
+            <Text style={{color: COLORS.dark, fontWeight: 'bold'}}>
+              Sign up
+            </Text>
+          </TouchableOpacity>
+        </View>
     </View>
   );
 };
