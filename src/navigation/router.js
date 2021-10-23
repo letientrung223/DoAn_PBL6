@@ -22,7 +22,6 @@ function SignInSignUp(){
     </Stack.Navigator>
   );
 }
-
 export default function Router() {
   return (
     <Tab.Navigator

@@ -5,8 +5,13 @@ import asset from "../../../assets/asset";
 import COLORS from "../../../src/consts/colors";
 import {FlatList,ScrollView,TextInput,TouchableHighlight,TouchableOpacity,} from "react-native-gesture-handler";
 import categories from "../../../src/consts/categories";
+import cloths from './../../consts/cloths';
 
-const Home = () => {
+
+const {width} = Dimensions.get('screen');
+const cardWidth = width / 2 - 20;
+
+const Home = ({navigation}) => {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
 
   const ListCategories = () => {
@@ -53,6 +58,42 @@ const Home = () => {
     );
   };
   // ====================================================
+    const Card = ({cloth}) => {
+    return (
+      <TouchableHighlight
+        underlayColor={COLORS.white}
+        activeOpacity={0.9}
+        onPress={() => navigation.navigate('DetailScreen',cloth)}>
+        <View style={styles.card}>
+          <View style={{alignItems: 'center', top: 2}}>
+            <Image source={cloth.image} style={{height: 120, width: 130}} />
+          </View>
+          <View style={{marginHorizontal: 20}}>
+            <Text style={{fontSize: 18, fontWeight: 'bold'}}>{cloth.name}</Text>
+            <Text style={{fontSize: 14, color: COLORS.grey, marginTop: 2}}>
+              {cloth.ingredients}
+            </Text>
+          </View>
+          <View
+            style={{
+              marginTop: 10,
+              marginHorizontal: 20,
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}>
+            <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+              ${cloth.price}
+            </Text>
+            <View style={styles.addToCartBtn}>
+              <FontAwesome name="plus" size={20} color={COLORS.white} />
+            </View>
+          </View>
+        </View>
+      </TouchableHighlight>
+    );
+  };
+  // ====================================================
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       {/* Phan Logo va User */}
@@ -88,7 +129,13 @@ const Home = () => {
       <View>
         <ListCategories/>
       </View>
-      {/*Load san pham len */}
+      {/*Load product card */}
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        numColumns={2}
+        data={cloths}
+        renderItem={({item}) => <Card cloth={item} />}
+      />
     </SafeAreaView>
   );
 };
@@ -146,7 +193,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-
+  card: {
+    height: 220,
+    width: cardWidth,
+    marginHorizontal: 10,
+    marginBottom: 5,
+    marginTop: 20,
+    borderRadius: 15,
+    elevation: 13,
+    backgroundColor: COLORS.white,
+  },
+  addToCartBtn: {
+    height: 30,
+    width: 30,
+    borderRadius: 20,
+    backgroundColor: COLORS.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
 });
 export default Home;
