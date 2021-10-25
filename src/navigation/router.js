@@ -10,7 +10,7 @@ import Home from "../screens/Home";
 // import DashBoard from "../screens/Dashboard";
 import SignInScreen from "../screens/SignInScreen";
 import SignUpScreen from "../screens/SignUpScreen";
-
+import User from "../screens/User";
 const Tab = createBottomTabNavigator();
 
 const Stack = createStackNavigator();
@@ -88,7 +88,7 @@ export default function Router() {
       {/* !isLogin?SignInSignUp?DashBoard */}
       <Tab.Screen
         name="Profile"
-        component={SignInSignUp}
+        component={User}
         options={{
           tabBarIcon: ({ size, color }) => (
             <FontAwesome name="user" size={size} color={color} />
