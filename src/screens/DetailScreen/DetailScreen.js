@@ -7,6 +7,9 @@ import COLORS from '../../consts/colors';
 import {SecondaryButton} from '../../components/Button';
 
 const DetailScreen = ({navigation, route}) => {
+  const onAddToCard = () => {
+    console.warn("Add To Card");
+  };
   const item = route.params;
 
   return (
@@ -43,7 +46,7 @@ const DetailScreen = ({navigation, route}) => {
             {item.detail}
           </Text>
           <View style={{marginTop: 40, marginBottom: 40}}>
-            <SecondaryButton title="Add To Cart" />
+            <SecondaryButton title="Add To Cart" onPress={onAddToCard}/>
           </View>
         </View>
       </ScrollView>

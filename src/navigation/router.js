@@ -7,7 +7,7 @@ import Cart from "../screens/Cart";
 import Menu from "../screens/Menu";
 import Search from "../screens/Search";
 import Home from "../screens/Home";
-import User from "../screens/User";
+// import DashBoard from "../screens/Dashboard";
 import SignInScreen from "../screens/SignInScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 
