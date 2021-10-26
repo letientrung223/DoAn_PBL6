@@ -10,6 +10,8 @@ import Home from "../screens/Home";
 // import DashBoard from "../screens/Dashboard";
 import SignInScreen from "../screens/SignInScreen";
 import SignUpScreen from "../screens/SignUpScreen";
+import AccountDetail from "../screens/AccountDetail";
+
 import User from "../screens/User";
 const Tab = createBottomTabNavigator();
 
@@ -88,7 +90,7 @@ export default function Router() {
       {/* !isLogin?SignInSignUp?DashBoard */}
       <Tab.Screen
         name="Profile"
-        component={User}
+        component={AccountDetail}
         options={{
           tabBarIcon: ({ size, color }) => (
             <FontAwesome name="user" size={size} color={color} />
