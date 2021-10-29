@@ -13,9 +13,9 @@ const DetailScreen = ({navigation, route}) => {
   const item = route.params;
 
   return (
-    <SafeAreaView style={{backgroundColor: COLORS.white}}>
+    <SafeAreaView style={{backgroundColor: COLORS.white, marginTop:30}}>
       <View style={style.header}>
-        <MaterialIcons name="arrow-back-ios" size={28} onPress={navigation.goBack} />
+        <MaterialIcons name="arrow-back-ios" size={28} onPress={() => navigation.navigate('Home')} />
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Details</Text>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -56,7 +56,7 @@ const DetailScreen = ({navigation, route}) => {
 
 const style = StyleSheet.create({
   header: {
-    paddingVertical: 20,
+    marginTop: 20,
     flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: 20,

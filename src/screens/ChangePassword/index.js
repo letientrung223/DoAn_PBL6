@@ -8,9 +8,10 @@ import {
   SafeAreaView,
   TouchableOpacity,
   TextInput,
-  Alert,
+  
 } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
+
 import { ScrollView } from "react-native-gesture-handler";
 import asset from "../../../assets/asset";
 import CustomButton from "../../components/CustomButton";
@@ -19,9 +20,10 @@ const ListSelect = [
   { id: "Dashboard",      title: " Dashboard",       icons: "home-outline" },
   { id: "Order",          title: " Order",           icons: "cart-outline" },
   { id: "Account Detail", title: " Account Detail",  icons: "person-outline" },
-  { id: "Change Password",title: "Change Password", icons: "key-outline" },
+  { id: "Change Password",title: "Change Password",  icons: "key-outline" },
   { id: "Log out",        title: " Log out",         icons: "log-out-outline" },
 ];
+
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
   <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
     <View>
@@ -32,9 +34,10 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
     </View>
   </TouchableOpacity>
 );
-const User = () => {
-  const onSubscribePressed = () => {
-    Alert("Da dang ki");
+const ChangePassword = () => {
+
+  const onSavePressed = () => {
+    console.warn("Saved");
   };
   const [selectedId, setSelectedId] = useState(null);
   const renderItem = ({ item }) => {
@@ -51,8 +54,10 @@ const User = () => {
     );
   };
 
+
   return (
-    <ScrollView>
+   
+    <ScrollView style={{marginTop:60}}>
       <View style={styles.header}>
         <Image
           source={asset.logo}
@@ -64,7 +69,7 @@ const User = () => {
         <Image
           source={require("../../../assets/images/person.png")}
           style={{ width: 370, height: 250, borderRadius: 10 }}
-          //resizeMode="contain"
+          
         />
       </View>
       <SafeAreaView>
@@ -73,6 +78,7 @@ const User = () => {
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
           extraData={selectedId}
+          // onPress navigator chỗ này để chuyển 
         />
         <Text
           style={{
@@ -82,52 +88,38 @@ const User = () => {
             paddingLeft: 10,
           }}
         >
-          Dashboard
+          Change Password
         </Text>
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: "normal",
-            textStyle: "#E2E2E2",
-            paddingTop: 30,
-            paddingLeft: 10,
-            paddingRight:10,
-            paddingBottom:20,
-          }}
-        >
-          From your account dashboard you can view your recent orders, manage
-          your account detail and change your password
+        <Text style={styles.text}>
+          Old Password
         </Text>
-        <View
-          style={styles.box}
-        >
-          <Text
-            style={{
-              fontSize: 20,
-              fontWeight: "bold",
-            }}
-          >
-            Get Expert Tips In Your Inbox
-          </Text>
-          <Text>Subscribe to our newsletter and stay updated</Text>
-          <TextInput
-            style={styles.textip}
-            placeholder={"Write your email here"}
-          />
-          <CustomButton
-            text="Subscribe"
-            bgColor="#000000"
-            fgColor="#FFFFFF"
-            onPress={onSubscribePressed}
-          />
+        <TextInput secureTextEntry={true} style={styles.textInput}/>
+        <Text style={styles.text}>
+          New Password
+        </Text>
+        <TextInput secureTextEntry={true} style={styles.textInput}/>
+        <Text style={styles.text}>
+         Re-New Password
+        </Text>
+        <TextInput secureTextEntry={true} style={styles.textInput}/>
+        
+        <View style={{paddingHorizontal:10}}>
+        <CustomButton
+        text="Save"
+        bgColor="#3D3D3D"
+        fgColor="#ffffff"
+        onPress={onSavePressed}              
+        />
         </View>
+
+       
       </SafeAreaView>
     </ScrollView>
+    
   );
 };
 const styles = StyleSheet.create({
   header: {
-    paddingTop: 72,
     paddingLeft: 16,
   },
   avt: {
@@ -150,22 +142,28 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
   },
-  textip:{
+  textInput:{
     height: 40,
-    width: "100%",
+    
     borderRadius: 10,
     margin: 12,
     borderWidth: 1,
-    padding: 10,
+    paddingHorizontal: 10,
     backgroundColor:"#FFFFFF",
   },
-  box:{
+  radiocontainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom:10,
+  },
+  text:{
+    fontSize: 20,
+    fontWeight: "normal",
     paddingTop: 10,
-    paddingHorizontal: 10,
-    backgroundColor: "#E2E2E2",
-    alignItems: "center",
-    justifyContent: "center",
-  }
+    paddingLeft: 10
+  },
+
 
 });
-export default User;
+export default ChangePassword;

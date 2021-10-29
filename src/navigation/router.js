@@ -7,12 +7,14 @@ import Cart from "../screens/Cart";
 import Menu from "../screens/Menu";
 import Search from "../screens/Search";
 import Home from "../screens/Home";
-// import DashBoard from "../screens/Dashboard";
+
+import User from "../screens/User";
 import SignInScreen from "../screens/SignInScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 import AccountDetail from "../screens/AccountDetail";
+import ChangePassword from "../screens/ChangePassword";
 
-import User from "../screens/User";
+
 const Tab = createBottomTabNavigator();
 
 const Stack = createStackNavigator();
@@ -39,7 +41,7 @@ export default function Router() {
           borderTopColor: "transparent",
           elevation: 0,
         },
-        labelShown: false, // khong the an ten tabbar nhi??
+        labelShown: false, // khong the ẩn tên tabbar nhi??
         
         activeTinColor: "#C02E2E",
         tabStyle: {
@@ -90,7 +92,7 @@ export default function Router() {
       {/* !isLogin?SignInSignUp?DashBoard */}
       <Tab.Screen
         name="Profile"
-        component={AccountDetail}
+        component={ChangePassword}
         options={{
           tabBarIcon: ({ size, color }) => (
             <FontAwesome name="user" size={size} color={color} />

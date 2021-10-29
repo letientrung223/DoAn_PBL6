@@ -28,7 +28,7 @@ const Cart = ({navigation}) => {
   return (
     <SafeAreaView style={{backgroundColor: COLORS.white,flex:1}}>
         <View style={styles.header}>
-          <FontAwesome name="arrow-left" size={28 } color="black" />
+          <FontAwesome name="arrow-left" size={28 } color="black" onPress={() => navigation.navigate('Home')} />
           <Text style={{fontSize: 24,fontWeight: 'bold'}}>  Cart</Text>
         </View>
         <FlatList

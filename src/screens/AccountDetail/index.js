@@ -10,18 +10,19 @@ import {
   TextInput,
   
 } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
+import { Ionicons } from '@expo/vector-icons';
+
 import { ScrollView } from "react-native-gesture-handler";
 import asset from "../../../assets/asset";
 import CustomButton from "../../components/CustomButton";
 import RadioGroup from 'react-native-radio-buttons-group';
 
 const ListSelect = [
-  { id: "Dashboard", title: "Dashboard", icons: "home" },
-  { id: "Order", title: "Order", icons: "cart-plus" },
-  { id: "Account Detail", title: "Account Detail", icons: "user" },
-  { id: "Change Profile", title: "Change Profile", icons: "key" },
-  { id: "Log out", title: "Log out", icons: "sign-out" },
+  { id: "Dashboard",      title: " Dashboard",       icons: "home-outline" },
+  { id: "Order",          title: " Order",           icons: "cart-outline" },
+  { id: "Account Detail", title: " Account Detail",  icons: "person-outline" },
+  { id: "Change Password",title: "Change Password",  icons: "key-outline" },
+  { id: "Log out",        title: " Log out",         icons: "log-out-outline" },
 ];
 const radioButtonsData = [
   {
@@ -42,7 +43,7 @@ const radioButtonsData = [
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
   <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
     <View>
-      <FontAwesome name={item.icons} size={25} />
+      <Ionicons name={item.icons} size={26} color="black" />
     </View>
     <View>
       <Text style={[styles.text, textColor]}> {item.title}</Text>
@@ -157,7 +158,6 @@ const AccountDetail = () => {
 };
 const styles = StyleSheet.create({
   header: {
-    marginTop:60,
     paddingLeft: 16,
   },
   avt: {
