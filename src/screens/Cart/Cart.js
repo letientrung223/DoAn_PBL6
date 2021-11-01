@@ -1,14 +1,21 @@
-import React from "react";
-import { View, Text, StyleSheet, Image, SafeAreaView, } from "react-native";
+import React, { useState }from "react";
+import { View, Text, StyleSheet, Image, SafeAreaView,CheckBox } from "react-native";
 import {FlatList} from 'react-native-gesture-handler';
 import { FontAwesome } from "@expo/vector-icons";
 import COLORS from '../../../src/consts/colors';
 import {PrimaryButton} from '../../../src/components/Button';
 import cloths from '../../../src/consts/cloths';
 const Cart = ({navigation}) => {
+  const [isSelected, setSelection] = useState(false);
+
   const CartCard = ({item})=> {
     return( 
     <View style={styles.cartCard}>
+        {/* <CheckBox
+          value={isSelected}
+          onValueChange={setSelection}
+          style={styles.checkbox}
+        /> */}
         <Image source= {item.image} style={{height:80, width:80}}/>
         <View style={{height:100,marginLeft:10,paddingVertical:20,flex:1,}}>
           <Text style={{fontSize:16, fontWeight: 'bold'}}>{item.name}</Text>
@@ -85,6 +92,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignContent: 'center',
+  },
+  checkbox: {
+    alignSelf: "center",
   },
 });
 export default Cart;

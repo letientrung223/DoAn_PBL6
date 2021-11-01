@@ -1,30 +1,47 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, SafeAreaView,Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  SafeAreaView,
+  Dimensions,
+} from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import asset from "../../../assets/asset";
 import COLORS from "../../../src/consts/colors";
-import {FlatList,ScrollView,TextInput,TouchableHighlight,TouchableOpacity,} from "react-native-gesture-handler";
+import {
+  FlatList,
+  ScrollView,
+  TextInput,
+  TouchableHighlight,
+  TouchableOpacity,
+} from "react-native-gesture-handler";
+
 import categories from "../../../src/consts/categories";
-import cloths from './../../consts/cloths';
+import brands from "../../../src/consts/brands";
+import cloths from "./../../consts/cloths";
 
-
-const {width} = Dimensions.get('screen');
+const { width } = Dimensions.get("screen");
 const cardWidth = width / 2 - 20;
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
+  const [selectedBrandIndex, setSelectedBrandIndex] = React.useState(0);
 
   const ListCategories = () => {
     return (
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.categoriesListContainer}>
+        contentContainerStyle={styles.categoriesListContainer}
+      >
         {categories.map((category, index) => (
           <TouchableOpacity
             key={index}
             activeOpacity={0.8}
-            onPress={() => setSelectedCategoryIndex(index)}>
+            onPress={() => setSelectedCategoryIndex(index)}
+          >
             <View
               style={{
                 backgroundColor:
@@ -32,23 +49,30 @@ const Home = ({navigation}) => {
                     ? COLORS.grey
                     : COLORS.grey_light,
                 ...styles.categoryBtn,
-              }}>
+              }}
+            >
               <View style={styles.categoryBtnImgCon}>
                 <Image
                   source={category.image}
-                  style={{height: 30, width: 30, resizeMode: 'cover',borderRadius: 10 }}
+                  style={{
+                    height: 30,
+                    width: 30,
+                    resizeMode: "cover",
+                    borderRadius: 10,
+                  }}
                 />
               </View>
               <Text
                 style={{
                   fontSize: 15,
-                  fontWeight: 'bold',
+                  fontWeight: "bold",
                   marginLeft: 10,
                   color:
                     selectedCategoryIndex == index
                       ? COLORS.white
                       : COLORS.light,
-                }}>
+                }}
+              >
                 {category.name}
               </Text>
             </View>
@@ -57,20 +81,60 @@ const Home = ({navigation}) => {
       </ScrollView>
     );
   };
+  const ListBrands = () => {
+    return (
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.categoriesListContainer}
+      >
+        {brands.map((brand, index) => (
+          <TouchableOpacity
+            key={index}
+            activeOpacity={0.8}
+            onPress={() => setSelectedBrandIndex(index)}
+          >
+            <View
+              style={{
+                backgroundColor:
+                  selectedBrandIndex == index ? COLORS.grey : COLORS.grey_light,
+                ...styles.brandBtn,
+              }}
+            >
+              <View style={styles.brandBtnImgCon}>
+                <Image
+                  source={brand.image}
+                  style={{
+                    height: 30,
+                    width: 30,
+                    resizeMode: "cover",
+                    borderRadius: 10,
+                  }}
+                />
+              </View>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+    );
+  };
   // ====================================================
-    const Card = ({cloth}) => {
+  const Card = ({ cloth }) => {
     return (
       <TouchableHighlight
         underlayColor={COLORS.white}
         activeOpacity={0.9}
-        onPress={() => navigation.navigate('DetailScreen',cloth)}>
+        onPress={() => navigation.navigate("DetailScreen", cloth)}
+      >
         <View style={styles.card}>
-          <View style={{alignItems: 'center', top: 2}}>
-            <Image source={cloth.image} style={{height: 120, width: 130}} />
+          <View style={{ alignItems: "center", top: 2 }}>
+            <Image source={cloth.image} style={{ height: 120, width: 130 }} />
           </View>
-          <View style={{marginHorizontal: 20}}>
-            <Text style={{fontSize: 18, fontWeight: 'bold'}}>{cloth.name}</Text>
-            <Text style={{fontSize: 14, color: COLORS.grey, marginTop: 2}}>
+          <View style={{ marginHorizontal: 20 }}>
+            <Text style={{ fontSize: 18, fontWeight: "bold", paddingTop: 10 }}>
+              {cloth.name}
+            </Text>
+            <Text style={{ fontSize: 14, color: COLORS.grey, marginTop: 2 }}>
               {cloth.ingredients}
             </Text>
           </View>
@@ -78,15 +142,13 @@ const Home = ({navigation}) => {
             style={{
               marginTop: 10,
               marginHorizontal: 20,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
-            <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            <Text style={{ fontSize: 18, fontWeight: "bold" }}>
               ${cloth.price}
             </Text>
-            <View style={styles.addToCartBtn}>
-              <FontAwesome name="plus" size={20} color={COLORS.white} />
-            </View>
           </View>
         </View>
       </TouchableHighlight>
@@ -112,7 +174,9 @@ const Home = ({navigation}) => {
         />
       </View>
       {/* Phan Search va Sort */}
-      <View style={{ marginTop: 30, flexDirection: "row", paddingHorizontal: 20 }}>
+      <View
+        style={{ marginTop: 30, flexDirection: "row", paddingHorizontal: 20,paddingBottom: 10 }}
+      >
         <View style={styles.inputContainer}>
           <FontAwesome name="search" size={24} color={COLORS.grey} />
           <TextInput
@@ -121,21 +185,49 @@ const Home = ({navigation}) => {
             marginLeft={10}
           />
         </View>
-        <View style={styles.sortContainer}>
+        {/* <View style={styles.sortContainer}>
           <FontAwesome name="sort-amount-asc" size={24} color={COLORS.white} />
+        </View> */}
+      </View>
+      <ScrollView>
+        {/* Phan List Categories */}
+        <View>
+          <Text
+            style={{
+              fontSize: 14,
+              fontWeight: "bold",
+              paddingTop: 10,
+              paddingLeft: 10,
+              marginLeft: 10,
+            }}
+          >
+            Shop By Category
+          </Text>
+          <ListCategories />
         </View>
-      </View>
-      {/* Phan List Categories */}
-      <View>
-        <ListCategories/>
-      </View>
-      {/*Load product card */}
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        numColumns={2}
-        data={cloths}
-        renderItem={({item}) => <Card cloth={item} />}
-      />
+        {/* Phan List Brands */}
+        <View>
+          <Text
+            style={{
+              fontSize: 14,
+              fontWeight: "bold",
+              paddingTop: 10,
+              paddingLeft: 10,
+              marginLeft: 10,
+            }}
+          >
+            Top Brands
+          </Text>
+          <ListBrands />
+        </View>
+        {/*Load product card */}
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          numColumns={2}
+          data={cloths}
+          renderItem={({ item }) => <Card cloth={item} />}
+        />
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -171,27 +263,27 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  categoriesListContainer:{
+  categoriesListContainer: {
     paddingVertical: 10,
-    alignItems: 'center',
+    alignItems: "center",
     paddingHorizontal: 20,
   },
-  categoryBtn:{
+  categoryBtn: {
     height: 45,
     width: 150,
     marginRight: 7,
     borderRadius: 30,
-    alignItems: 'center',
+    alignItems: "center",
     paddingHorizontal: 5,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   categoryBtnImgCon: {
     height: 35,
     width: 35,
     backgroundColor: COLORS.white,
     borderRadius: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   card: {
     height: 220,
@@ -208,9 +300,25 @@ const styles = StyleSheet.create({
     width: 30,
     borderRadius: 20,
     backgroundColor: COLORS.primary,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
-
+  brandBtn: {
+    height: 150,
+    width: 150,
+    marginRight: 7,
+    borderRadius: 30,
+    alignItems: "center",
+    paddingHorizontal: 5,
+    flexDirection: "row",
+  },
+  brandBtnImgCon: {
+    height: 140,
+    width: 140,
+    backgroundColor: COLORS.dark,
+    borderRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
 export default Home;
