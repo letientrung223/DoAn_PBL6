@@ -13,7 +13,7 @@ import SignInScreen from "../screens/SignInScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 import AccountDetail from "../screens/AccountDetail";
 import ChangePassword from "../screens/ChangePassword";
-
+import OrderScreen from "../screens/OrderScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -23,6 +23,17 @@ function SignInSignUp(){
     <Stack.Navigator screenOptions={{headerShown:false}}>
       <Stack.Screen name="SignInScreen" component={SignInScreen}/>
       <Stack.Screen name="SignUpScreen" component={SignUpScreen}/>
+    </Stack.Navigator>
+  );
+}
+function Moving(){
+  return(
+    <Stack.Navigator screenOptions={{headerShown:false}}>
+      <Stack.Screen name="User" component={User}/>
+      <Stack.Screen name="OrderScreen" component={OrderScreen}/>
+      <Stack.Screen name="AccountDetail" component={AccountDetail}/>
+      <Stack.Screen name="ChangePassword" component={ChangePassword}/>
+
     </Stack.Navigator>
   );
 }
@@ -89,10 +100,10 @@ export default function Router() {
           ),
         }}
       />
-      {/* !isLogin?SignInSignUp?DashBoard */}
+      {/* !isLogin ? SignInSignUp ? DashBoard */}
       <Tab.Screen
         name="Profile"
-        component={ChangePassword}
+        component={Moving}
         options={{
           tabBarIcon: ({ size, color }) => (
             <FontAwesome name="user" size={size} color={color} />

@@ -224,7 +224,7 @@ const Home = ({ navigation }) => {
         <FlatList
           showsVerticalScrollIndicator={false}
           numColumns={2}
-          data={cloths}
+          data={cloths}          
           renderItem={({ item }) => <Card cloth={item} />}
         />
       </ScrollView>

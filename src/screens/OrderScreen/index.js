@@ -7,76 +7,16 @@ import {
   FlatList,
   SafeAreaView,
   TouchableOpacity,
-  TextInput,
   
 } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 
 import { ScrollView } from "react-native-gesture-handler";
 import asset from "../../../assets/asset";
-import CustomButton from "../../components/CustomButton";
-import RadioGroup from 'react-native-radio-buttons-group';
 import COLORS from "../../consts/colors"
+import orderList from './../../consts/orderlist';
 
-// const ListSelect = [
-//   { id: "Dashboard",      title: " Dashboard",       icons: "home-outline" },
-//   { id: "Order",          title: " Order",           icons: "cart-outline" },
-//   { id: "Account Detail", title: " Account Detail",  icons: "person-outline" },
-//   { id: "Change Password",title: "Change Password",  icons: "key-outline" },
-//   { id: "Log out",        title: " Log out",         icons: "log-out-outline" },
-// ];
-const radioButtonsData = [
-  {
-    id: '1',
-    label: 'Male',
-    value: 'option1',
-    color: '#9C9999',
-    selected: true,
-  },
-  {
-    id: '2',
-    label: 'Female',
-    value: 'option2',
-    color: '#9C9999',
-    selected: false,
-  },
-];
-// const Item = ({ item, onPress, backgroundColor, textColor }) => (
-//   <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-//     <View>
-//       <Ionicons name={item.icons} size={26} color="black" />
-//     </View>
-//     <View>
-//       <Text style={[styles.text, textColor]}> {item.title}</Text>
-//     </View>
-//   </TouchableOpacity>
-// );
-const AccountDetail = ({navigation}) => {
-
-  const onSavePressed = () => {
-    console.warn("Saved");
-  };
-
-  const [radioButtons, setRadioButtons] = useState(radioButtonsData);
-  const onPressRadioButton = radioButtonsArray => {
-    console.log(radioButtonsArray);
-    setRadioButtons(radioButtonsArray);
-  };
-
-  // const [selectedId, setSelectedId] = useState(null);
-  // const renderItem = ({ item }) => {
-  //   const backgroundColor = item.id === selectedId ? "#9C9999" : "#E2E2E2";
-  //   const color = item.id === selectedId ? "white" : "black";
-
-  //   return (
-  //     <Item
-  //       item={item}
-  //       onPress={() => setSelectedId(item.id)}
-  //       backgroundColor={{ backgroundColor }}
-  //       textColor={{ color }}
-  //     />
-  //   );
-  // };
+const Order = ({navigation}) => {
 
   return (
    
@@ -96,12 +36,6 @@ const AccountDetail = ({navigation}) => {
         />
       </View>
       <SafeAreaView>
-        {/* <FlatList
-          data={ListSelect}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          extraData={selectedId}
-        /> */}
           <TouchableOpacity onPress={()=>{navigation.navigate("User")}} 
             style={{ backgroundColor:'#E2E2E2',height:50,padding:10,marginHorizontal:10,marginTop:5}} >
           <View style={{flexDirection: "row",alignItems: "center"}}>
@@ -109,15 +43,15 @@ const AccountDetail = ({navigation}) => {
             <Text style={{fontSize:24}}> Dashboard</Text>
           </View> 
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>{navigation.navigate("OrderScreen")}} 
-            style={{ backgroundColor:'#E2E2E2',height:50,padding:10,marginHorizontal:10,marginTop:5}} >
+        <TouchableOpacity onPress={()=>{}} 
+            style={{ backgroundColor:COLORS.grey,height:50,padding:10,marginHorizontal:10,marginTop:5}} >
           <View style={{flexDirection: "row",alignItems: "center"}}>
             <Ionicons name='cart' size={26} color="black" /> 
             <Text style={{fontSize:24}}> Order</Text>
           </View> 
         </TouchableOpacity>
         <TouchableOpacity onPress={()=>{navigation.navigate("AccountDetail")}} 
-            style={{ backgroundColor:COLORS.grey,height:50,padding:10,marginHorizontal:10,marginTop:5}} >
+            style={{ backgroundColor:'#E2E2E2' ,height:50,padding:10,marginHorizontal:10,marginTop:5}} >
           <View style={{flexDirection: "row",alignItems: "center"}}>
             <Ionicons name='person' size={26} color="black" /> 
             <Text style={{fontSize:24}}> Account Detail</Text>
@@ -145,48 +79,9 @@ const AccountDetail = ({navigation}) => {
             paddingLeft: 10,
           }}
         >
-          Account Detail
+          Order
         </Text>
-        <Text style={styles.text}>
-          First Name
-        </Text>
-        <TextInput style={styles.textInput}/>
-        <Text style={styles.text}>
-          Last Name
-        </Text>
-        <TextInput style={styles.textInput}/>
-        <Text style={styles.text}>
-          Display Name
-        </Text>
-        <TextInput style={styles.textInput}/>
-        <Text style={styles.text}>
-          Phone/Number
-        </Text>
-        <TextInput style={styles.textInput}/>
-        <Text style={styles.text}>
-          Email
-        </Text>
-        <TextInput style={styles.textInput}/>
-        <Text style={styles.text}>
-          Gender
-        </Text>
-        <View style={styles.radiocontainer}>
-          <RadioGroup
-            radioButtons={radioButtons}
-            onPress={onPressRadioButton}
-            layout="row"
-          />
-        </View>
-        <View style={{paddingHorizontal:10}}>
-        <CustomButton
-        text="Save"
-        bgColor="#3D3D3D"
-        fgColor="#ffffff"
-        onPress={onSavePressed}              
-        />
-      </View>
 
-       
       </SafeAreaView>
     </ScrollView>
     
@@ -240,4 +135,5 @@ const styles = StyleSheet.create({
 
 
 });
-export default AccountDetail;
+export default Order;
+
