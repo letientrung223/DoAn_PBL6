@@ -1,11 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-const Menu = () => {
+const Menu = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Menu</Text>
-      <FontAwesome name="bars" />
+      <FontAwesome name="bars" size={60} onPress={() =>navigation.navigate("HomeScreen")}/>
     </View>
   );
 };

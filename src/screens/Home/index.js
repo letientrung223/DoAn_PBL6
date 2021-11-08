@@ -165,7 +165,7 @@ const Home = ({ navigation }) => {
             <FontAwesome name="bars" size={35} 
                          color={COLORS.dark} 
                          style={{paddingRight:35}}
-                          />
+                         onPress={()=>navigation.navigate("Menu")} />
             <Image style={styles.Logo} source={asset.logo} />
           </View>
         </View>
@@ -173,9 +173,7 @@ const Home = ({ navigation }) => {
           source={require("../../../assets/images/person.png")}
           style={{ height: 35, width: 35, borderRadius: 25 }}
         />
-      </View>
-      {/* Phan Search va Sort */}
-    
+      </View>    
       <ScrollView>
         {/* Phan List Categories */}
         <View>
