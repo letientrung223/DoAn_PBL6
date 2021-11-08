@@ -162,33 +162,20 @@ const Home = ({ navigation }) => {
       <View style={styles.header}>
         <View>
           <View style={{ flexDirection: "row" }}>
+            <FontAwesome name="bars" size={35} 
+                         color={COLORS.dark} 
+                         style={{paddingRight:35}}
+                          />
             <Image style={styles.Logo} source={asset.logo} />
           </View>
-          <Text style={{ fontSize: 14, fontWeight: "normal", paddingLeft: 5 }}>
-            How are you today!
-          </Text>
         </View>
         <Image
           source={require("../../../assets/images/person.png")}
-          style={{ height: 50, width: 50, borderRadius: 25 }}
+          style={{ height: 35, width: 35, borderRadius: 25 }}
         />
       </View>
       {/* Phan Search va Sort */}
-      <View
-        style={{ marginTop: 30, flexDirection: "row", paddingHorizontal: 20,paddingBottom: 10 }}
-      >
-        <View style={styles.inputContainer}>
-          <FontAwesome name="search" size={24} color={COLORS.grey} />
-          <TextInput
-            style={{ flex: 1, fontSize: 18 }}
-            placeholder="Search...."
-            marginLeft={10}
-          />
-        </View>
-        {/* <View style={styles.sortContainer}>
-          <FontAwesome name="sort-amount-asc" size={24} color={COLORS.white} />
-        </View> */}
-      </View>
+    
       <ScrollView>
         {/* Phan List Categories */}
         <View>
@@ -242,18 +229,10 @@ const styles = StyleSheet.create({
   },
   Logo: {
     paddingTop: 10,
-    height: 30,
-    width: 190,
+    height: 35,
+    width: 220,
   },
-  inputContainer: {
-    flex: 1,
-    height: 50,
-    borderRadius: 10,
-    flexDirection: "row",
-    backgroundColor: COLORS.grey_light,
-    alignItems: "center",
-    paddingHorizontal: 20,
-  },
+ 
   sortContainer: {
     width: 50,
     borderRadius: 10,

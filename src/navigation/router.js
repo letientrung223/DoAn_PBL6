@@ -1,7 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome } from "@expo/vector-icons";
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator } from "@react-navigation/stack";
 
 import Cart from "../screens/Cart";
 import Menu from "../screens/Menu";
@@ -14,46 +14,44 @@ import SignUpScreen from "../screens/SignUpScreen";
 import AccountDetail from "../screens/AccountDetail";
 import ChangePassword from "../screens/ChangePassword";
 import OrderScreen from "../screens/OrderScreen";
+import DetailScreen from "../screens/DetailScreen";
 
 const Tab = createBottomTabNavigator();
 
 const Stack = createStackNavigator();
-function SignInSignUp(){
-  return(
-    <Stack.Navigator screenOptions={{headerShown:false}}>
-      <Stack.Screen name="SignInScreen" component={SignInScreen}/>
-      <Stack.Screen name="SignUpScreen" component={SignUpScreen}/>
-    </Stack.Navigator>
-  );
-}
-function Moving(){
-  return(
-    <Stack.Navigator screenOptions={{headerShown:false}}>
-      <Stack.Screen name="User" component={User}/>
-      <Stack.Screen name="OrderScreen" component={OrderScreen}/>
-      <Stack.Screen name="AccountDetail" component={AccountDetail}/>
-      <Stack.Screen name="ChangePassword" component={ChangePassword}/>
 
+function Moving() {
+  return (
+    // ktr dang nhap cho nay
+    <Stack.Navigator
+      initialRouteName="SignInScreen"
+      screenOptions={{ headerShown: false }}
+    >
+      <Stack.Screen name="SignInScreen" component={SignInScreen} />
+      <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+      <Stack.Screen name="User" component={User} />
+      <Stack.Screen name="OrderScreen" component={OrderScreen} />
+      <Stack.Screen name="AccountDetail" component={AccountDetail} />
+      <Stack.Screen name="ChangePassword" component={ChangePassword} />
     </Stack.Navigator>
   );
 }
-export default function Router() {
+
+ function Router() {
   return (
     <Tab.Navigator
-      
       initialRouteName="Home"
       screenOptions={{
         headerShown: false,
-        
       }}
       tabBarOption={{
         style: {
-          backgroundColor: '#EE8822',
+          backgroundColor: "#EE8822",
           borderTopColor: "transparent",
           elevation: 0,
         },
-        labelShown: false, // khong the ẩn tên tabbar nhi??
-        
+        labelShown: false,
+
         activeTinColor: "#C02E2E",
         tabStyle: {
           paddingBottom: 5,
@@ -62,31 +60,20 @@ export default function Router() {
       }}
     >
       <Tab.Screen
-        name="Menu"
-        component={Menu}
+        name="Home"
+        component={Home}
         options={{
           tabBarIcon: ({ size, color }) => (
-            <FontAwesome name="bars" size={size} color={color} />
+            <FontAwesome name="home" size={size} color={color} />
           ),
         }}
       />
-
       <Tab.Screen
         name="Search"
         component={Search}
         options={{
           tabBarIcon: ({ size, color }) => (
             <FontAwesome name="search" size={size} color={color} />
-          ),
-        }}
-      />
-
-      <Tab.Screen
-        name="Home"
-        component={Home}
-        options={{
-          tabBarIcon: ({ size, color }) => (
-            <FontAwesome name="home" size={size} color={color} />
           ),
         }}
       />
@@ -113,3 +100,4 @@ export default function Router() {
     </Tab.Navigator>
   );
 }
+export default Router;
