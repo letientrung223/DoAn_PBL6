@@ -43,7 +43,8 @@ const Order = ({ navigation }) => {
             justifyContent: "center",
           }}
         >
-          <TouchableOpacity onPress={() => {}}>
+          {/* navigate đến trang order detail */}
+          <TouchableOpacity onPress={() => {}}> 
             <Text> View Detail</Text>
           </TouchableOpacity>
         </View>

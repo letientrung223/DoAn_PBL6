@@ -164,7 +164,7 @@ const Home = ({ navigation }) => {
           <View style={{ flexDirection: "row" }}>
             <FontAwesome name="bars" size={35} 
                          color={COLORS.dark} 
-                         style={{paddingRight:35}}
+                         style={{paddingRight:25}}
                          onPress={()=>navigation.navigate("Menu")} />
             <Image style={styles.Logo} source={asset.logo} />
           </View>

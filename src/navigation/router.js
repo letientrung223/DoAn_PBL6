@@ -24,7 +24,7 @@ function Moving() {
   return (
     // ktr dang nhap cho nay
     <Stack.Navigator
-      initialRouteName="SignInScreen"
+      initialRouteName="User"
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="SignInScreen" component={SignInScreen} />
