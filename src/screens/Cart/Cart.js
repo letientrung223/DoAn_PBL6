@@ -16,15 +16,25 @@ import { PrimaryButton } from "../../../src/components/Button";
 import cloths from "../../../src/consts/cloths";
 const Cart = ({ navigation }) => {
   const [isSelected, setSelection] = useState(false);
+  
+  const [count, setCount] = useState(1);
+
+    const increase = () => {
+    setCount(count => count + 1);
+  };
+
+  const decrease = () => {
+    setCount(count => count - 1);
+  };
 
   const CartCard = ({ item }) => {
     return (
       <View style={styles.cartCard}>
-        <CheckBox
+        {/* <CheckBox
           value={isSelected}
           onValueChange={setSelection}
           style={styles.checkbox}
-        />
+        /> */}
         <Image
           source={item.image}
           style={{ height: 100, width: 100, marginTop: 30 }}
@@ -52,24 +62,23 @@ const Cart = ({ navigation }) => {
           </Text>
           <View style={{ flexDirection: "row" }}></View>
           <View style={styles.actionBtn}>
+            {/* Nút giảm */}
             <TouchableOpacity
-              onPress={() => {
-                console.warn("Giam");
-              }}
+             
+             disabled={count <= 1}
+             onPress={decrease}
             >
-              <FontAwesome name="minus" size={25} color={COLORS.white} />
+              <FontAwesome name="minus" size={25} color={COLORS.dark} />
             </TouchableOpacity>
-            <TextInput
-              placeholder="1"
-              style={{ fontSize: 23, fontWeight: "bold" }}
-            />
-
+            {/* Số lượng */}
+            <TextInput style={{ fontSize:16}} >{count}</TextInput>
+            {/* Nút tăng */}
             <TouchableOpacity
-              onPress={() => {
-                console.warn("Tăng");
-              }}
+               // increaseCount;
+               onPress={increase}
+              
             >
-              <FontAwesome name="plus" size={25} color={COLORS.white} />
+              <FontAwesome name="plus" size={25} color={COLORS.dark} />
             </TouchableOpacity>
           </View>
           <TouchableOpacity
@@ -147,7 +156,7 @@ const styles = StyleSheet.create({
   actionBtn: {
     width: 100,
     height: 30,
-    backgroundColor: COLORS.primary,
+    //backgroundColor: COLORS.primary,
     borderRadius: 30,
     paddingHorizontal: 5,
     flexDirection: "row",
