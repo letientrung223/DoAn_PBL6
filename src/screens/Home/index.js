@@ -1,11 +1,11 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
   View,
   Text,
   StyleSheet,
   Image,
   SafeAreaView,
-  Dimensions,
+  Dimensions,ActivityIndicator
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import asset from "../../../assets/asset";
@@ -28,6 +28,26 @@ const cardWidth = width / 2 - 20;
 const Home = ({ navigation }) => {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
   const [selectedBrandIndex, setSelectedBrandIndex] = React.useState(0);
+  
+
+  // const [data, setdata] = React.useState([])
+   //const [isloading, setisloading] = React.useState(true)
+  
+  // useEffect(() => {
+  //   getListProducts();
+  //   return () => {
+  //   }
+  // }, [])
+  // getListProducts =() => {
+  //   const apiURL = 'https://shop-pbl6.herokuapp.com/api/v1/products';
+  //   fetch(apiURL)
+  //   .then((res) => res.json())
+  //   .then((resJson)=>{
+  //     setdata(resJson)
+  //   }).catch((error) => {
+  //     console.log("Error: ", error);
+  //   }).finally(() => setisloading(false));
+  // }
 
   const ListCategories = () => {
     return (
@@ -135,7 +155,8 @@ const Home = ({ navigation }) => {
               {cloth.name}
             </Text>
             <Text style={{ fontSize: 14, color: COLORS.grey, marginTop: 2 }}>
-              {cloth.ingredients}
+              {/* {cloth.brand} */}
+              {cloth.name}
             </Text>
           </View>
           <View
@@ -206,12 +227,15 @@ const Home = ({ navigation }) => {
           <ListBrands />
         </View>
         {/*Load product card */}
+        {/* //{isloading ? <ActivityIndicator/>: ( */}
         <FlatList
           showsVerticalScrollIndicator={false}
           numColumns={2}
           data={cloths}          
           renderItem={({ item }) => <Card cloth={item} />}
+          keyExtractor ={item =>`key-${item.id}`}
         />
+        {/* )} */}
       </ScrollView>
     </SafeAreaView>
   );
