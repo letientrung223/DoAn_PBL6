@@ -37,7 +37,7 @@ function Moving() {
   );
 }
 
- function Router() {
+function Router() {
   return (
     <Tab.Navigator
       initialRouteName="Home"

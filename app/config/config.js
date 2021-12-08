@@ -1,0 +1,1 @@
+export const API_URL = 'https://shop-pbl6.herokuapp.com/api/v1/'

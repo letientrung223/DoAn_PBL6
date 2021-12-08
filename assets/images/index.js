@@ -1,0 +1,43 @@
+// todo: need update path of all images 
+
+export default {
+  common: {
+    logo: require("../images/common/Logo1.png"),
+    watch: require("../image/categories/watch.png"),
+    sunglass: require("./categories/sunglass.png"),
+    sneaker: require("./categories/sneaker.png"),
+    woman: require("./categories/woman.png"),
+    man: require("./categories/man.png"),
+    kids: require("./categories/kids.png"),
+    sports: require("./categories/sports.png"),
+    bags: require("./categories/bags.png"),
+
+    tshirt: require("../assets/images/t-shirt.png"),
+    casualshoes: require("../assets/images/casualshoes.png"),
+    scarves: require("../assets/images/scarves.png"),
+    suit: require("../assets/images/suit.png"),
+    polo: require("../assets/images/polo.png"),
+    hoodie: require("../assets/images/hoodie.png"),
+    flats: require("../assets/images/flat.png"),
+    boots: require("../assets/images/giay.png"),
+    jacket: require("../assets/images/jacket.png"),
+  },
+  brand: {
+    blazefashion: require("./brands/blaze-fashion.png"),
+    clothingegy: require("./brands/clothingegy.png"),
+    clothingtastic: require("./brands/clothingtastic.png"),
+    clubshoes: require("./brands/club-shoes.png"),
+    fashadil: require("../assets/brands/fashadil.png"),
+    fashnetic: require("../assets/brands/fashnetic.png"),
+    fusion: require("../assets/brands/fusion.png"),
+    hoppister: require("../assets/brands/hoppister.png"),
+    huntershoes: require("../assets/brands/hunter-shoes.png"),
+    popclothing: require("../assets/brands/pop-clothing.png"),
+    sholy: require("../assets/brands/sholy.png"),
+    shoozly: require("../assets/brands/shoozly.png"),
+    shosio: require("../assets/brands/shosio.png"),
+    shovia: require("../assets/brands/shovia.png"),
+    tyrant: require("../assets/brands/tyrant.png"),
+  },
+  categories: {},
+};

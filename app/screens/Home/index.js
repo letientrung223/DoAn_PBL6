@@ -21,14 +21,21 @@ import {
 import categories from "../../../src/consts/categories";
 import brands from "../../../src/consts/brands";
 import cloths from "./../../consts/cloths";
+import { useDispatch, useSelector } from "../../../src/react-redux";
+import { callApiGetListProducts } from "../../redux/home/homeAction";
 
 const { width } = Dimensions.get("screen");
 const cardWidth = width / 2 - 20;
+
+const dispatch = useDispatch();
 
 const Home = ({ navigation }) => {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
   const [selectedBrandIndex, setSelectedBrandIndex] = React.useState(0);
   
+  useEffect(() => {
+    dispatch(callApiGetListProducts);
+  })
 
   // const [data, setdata] = React.useState([])
    //const [isloading, setisloading] = React.useState(true)
@@ -176,6 +183,8 @@ const Home = ({ navigation }) => {
     );
   };
   // ====================================================
+
+  const productList = useSelector((state) => state.home.products)
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
