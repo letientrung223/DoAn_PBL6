@@ -12,5 +12,5 @@ export const getProductList = (products) => ({
     type: GET_ALL_PRODUCTS,
     payload: products
   })
-}})
+})
 
