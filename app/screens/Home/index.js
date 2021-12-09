@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -6,7 +6,7 @@ import {
   Image,
   SafeAreaView,
   Dimensions,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import asset from "../../../assets/images"; //?
@@ -23,22 +23,20 @@ import categories from "../../consts/categories";
 import brands from "../../consts/brands";
 // import cloths from "./../../consts/cloths";
 import { useDispatch, useSelector } from "react-redux";
-import { callApiGetListProducts } from "../../redux/home/homeAction";
+import { getProducts } from "../../redux/home/action";
 
 const { width } = Dimensions.get("screen");
 const cardWidth = width / 2 - 20;
 
-const dispatch = useDispatch();
-
 const Home = ({ navigation }) => {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
   const [selectedBrandIndex, setSelectedBrandIndex] = React.useState(0);
-  
-  //
-  useEffect(() => {
-    dispatch(callApiGetListProducts);
-  })
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProducts);
+  }, []);
 
   const ListCategories = () => {
     return (
@@ -168,18 +166,19 @@ const Home = ({ navigation }) => {
   };
   // ====================================================
 
-  const productList = useSelector((state) => state.home.products) // lấy data
-
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       {/* Phan Logo va User */}
       <View style={styles.header}>
         <View>
           <View style={{ flexDirection: "row" }}>
-            <FontAwesome name="bars" size={35} 
-                         color={COLORS.dark} 
-                         style={{paddingRight:25}}
-                         onPress={()=>navigation.navigate("Menu")} />
+            <FontAwesome
+              name="bars"
+              size={35}
+              color={COLORS.dark}
+              style={{ paddingRight: 25 }}
+              onPress={() => navigation.navigate("Menu")}
+            />
             <Image style={styles.Logo} source={asset.common.logo} />
           </View>
         </View>
@@ -187,7 +186,7 @@ const Home = ({ navigation }) => {
           source={asset.common.person}
           style={{ height: 35, width: 35, borderRadius: 25 }}
         />
-      </View>    
+      </View>
       <ScrollView>
         {/* Phan List Categories */}
         <View>
@@ -221,13 +220,13 @@ const Home = ({ navigation }) => {
         </View>
         {/*Load product card */}
         {/* //{isloading ? <ActivityIndicator/>: ( */}
-        <FlatList
+        {/* <FlatList
           showsVerticalScrollIndicator={false}
           numColumns={2}
-          data={productList}          
+          data={productList}
           renderItem={({ item }) => <Card cloth={item} />}
-          keyExtractor ={item =>`key-${item.id}`}
-        />
+          keyExtractor={(item) => `key-${item.id}`}
+        /> */}
         {/* )} */}
       </ScrollView>
     </SafeAreaView>
@@ -247,7 +246,7 @@ const styles = StyleSheet.create({
     height: 35,
     width: 220,
   },
- 
+
   sortContainer: {
     width: 50,
     borderRadius: 10,

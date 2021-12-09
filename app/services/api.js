@@ -1,4 +1,4 @@
-import { API_URL } from './config'
+import { API_URL } from '../config/config'
 export const SERVER_ADDRESS = API_URL;
 
 const getParam = (method, data, headers) => {
