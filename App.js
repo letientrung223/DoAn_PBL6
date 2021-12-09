@@ -4,8 +4,8 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Provider } from "react-redux";
-import HomeToDetail from "./src/navigation/hometodetail";
-import store from "./store/store";
+import HomeToDetail from "./app/navigators/hometodetail";
+import store from "./app/redux";
 const Stack = createStackNavigator();
 
 export default function App() {

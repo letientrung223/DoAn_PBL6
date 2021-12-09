@@ -12,8 +12,8 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 
 import { ScrollView } from "react-native-gesture-handler";
-import asset from "../../../assets/asset";
 import COLORS from "../../consts/colors";
+
 
 const CheckOut = ({ navigation }) => {
     return (

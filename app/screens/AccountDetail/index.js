@@ -13,10 +13,10 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 
 import { ScrollView } from "react-native-gesture-handler";
-import asset from "../../../assets/asset";
+import asset from "../../../assets/images/index";
 import CustomButton from "../../components/CustomButton";
 import RadioGroup from 'react-native-radio-buttons-group';
-import COLORS from "../../consts/colors"
+import COLORS from "../../consts/colors";
 
 // const ListSelect = [
 //   { id: "Dashboard",      title: " Dashboard",       icons: "home-outline" },
@@ -90,7 +90,7 @@ const AccountDetail = ({navigation}) => {
       </View>
       <View style={styles.avt}>
         <Image
-          source={require("../../../assets/images/person.png")}
+          source={require("../../../assets/images/common/person.png")}
           style={{ width: 370, height: 250, borderRadius: 10 }}
           
         />

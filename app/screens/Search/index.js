@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Image,TextInput } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import COLORS from "../../../src/consts/colors";
+import COLORS from "../../consts/colors";
 
 const Search = () => {
   return (

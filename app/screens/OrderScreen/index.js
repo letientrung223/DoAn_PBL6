@@ -12,8 +12,9 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 
 import { ScrollView } from "react-native-gesture-handler";
-import asset from "../../../assets/asset";
+ import asset from "../../../assets/images/index";
 import COLORS from "../../consts/colors";
+
 import orderList from "./../../consts/orderlist";
 const { width } = Dimensions.get("screen");
 const cardWidth = width - 20;
@@ -62,7 +63,7 @@ const Order = ({ navigation }) => {
       </View>
       <View style={styles.avt}>
         <Image
-          source={require("../../../assets/images/person.png")}
+          source={asset.common.person}
           style={{ width: 370, height: 250, borderRadius: 10 }}
         />
       </View>

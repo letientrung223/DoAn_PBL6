@@ -13,9 +13,10 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 
 import { ScrollView } from "react-native-gesture-handler";
-import asset from "../../../assets/asset";
+import asset from "../../../assets/images/index";
 import CustomButton from "../../components/CustomButton";
-import COLORS from "../../consts/colors"
+import COLORS from "../../consts/colors";
+
 
 // const ListSelect = [
 //   { id: "Dashboard",      title: " Dashboard",       icons: "home-outline" },
@@ -68,7 +69,7 @@ const ChangePassword = ({navigation}) => {
       </View>
       <View style={styles.avt}>
         <Image
-          source={require("../../../assets/images/person.png")}
+          source={asset.common.person}
           style={{ width: 370, height: 250, borderRadius: 10 }}
           
         />

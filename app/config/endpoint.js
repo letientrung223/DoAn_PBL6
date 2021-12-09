@@ -1,3 +1,3 @@
 export const endpoints = {
-  LIST_PRODUCT: 'product',
+  LIST_PRODUCT: 'products',
 }

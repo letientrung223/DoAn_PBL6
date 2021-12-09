@@ -22,7 +22,7 @@ const Stack = createStackNavigator();
 
 function Moving() {
   return (
-    // ktr dang nhap cho nay
+
     <Stack.Navigator
       initialRouteName="User"
       screenOptions={{ headerShown: false }}
@@ -87,7 +87,6 @@ function Router() {
           ),
         }}
       />
-      {/* !isLogin ? SignInSignUp ? DashBoard */}
       <Tab.Screen
         name="Profile"
         component={Moving}

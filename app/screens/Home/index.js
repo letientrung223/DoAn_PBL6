@@ -5,11 +5,12 @@ import {
   StyleSheet,
   Image,
   SafeAreaView,
-  Dimensions,ActivityIndicator
+  Dimensions,
+  ActivityIndicator
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import asset from "../../../assets/asset";
-import COLORS from "../../../src/consts/colors";
+import asset from "../../../assets/images"; //?
+import COLORS from "../../consts/colors";
 import {
   FlatList,
   ScrollView,
@@ -18,10 +19,10 @@ import {
   TouchableOpacity,
 } from "react-native-gesture-handler";
 
-import categories from "../../../src/consts/categories";
-import brands from "../../../src/consts/brands";
-import cloths from "./../../consts/cloths";
-import { useDispatch, useSelector } from "../../../src/react-redux";
+import categories from "../../consts/categories";
+import brands from "../../consts/brands";
+// import cloths from "./../../consts/cloths";
+import { useDispatch, useSelector } from "react-redux";
 import { callApiGetListProducts } from "../../redux/home/homeAction";
 
 const { width } = Dimensions.get("screen");
@@ -33,28 +34,11 @@ const Home = ({ navigation }) => {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
   const [selectedBrandIndex, setSelectedBrandIndex] = React.useState(0);
   
+  //
   useEffect(() => {
     dispatch(callApiGetListProducts);
   })
 
-  // const [data, setdata] = React.useState([])
-   //const [isloading, setisloading] = React.useState(true)
-  
-  // useEffect(() => {
-  //   getListProducts();
-  //   return () => {
-  //   }
-  // }, [])
-  // getListProducts =() => {
-  //   const apiURL = 'https://shop-pbl6.herokuapp.com/api/v1/products';
-  //   fetch(apiURL)
-  //   .then((res) => res.json())
-  //   .then((resJson)=>{
-  //     setdata(resJson)
-  //   }).catch((error) => {
-  //     console.log("Error: ", error);
-  //   }).finally(() => setisloading(false));
-  // }
 
   const ListCategories = () => {
     return (
@@ -184,7 +168,7 @@ const Home = ({ navigation }) => {
   };
   // ====================================================
 
-  const productList = useSelector((state) => state.home.products)
+  const productList = useSelector((state) => state.home.products) // lấy data
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
@@ -196,11 +180,11 @@ const Home = ({ navigation }) => {
                          color={COLORS.dark} 
                          style={{paddingRight:25}}
                          onPress={()=>navigation.navigate("Menu")} />
-            <Image style={styles.Logo} source={asset.logo} />
+            <Image style={styles.Logo} source={asset.common.logo} />
           </View>
         </View>
         <Image
-          source={require("../../../assets/images/person.png")}
+          source={asset.common.person}
           style={{ height: 35, width: 35, borderRadius: 25 }}
         />
       </View>    
@@ -240,7 +224,7 @@ const Home = ({ navigation }) => {
         <FlatList
           showsVerticalScrollIndicator={false}
           numColumns={2}
-          data={cloths}          
+          data={productList}          
           renderItem={({ item }) => <Card cloth={item} />}
           keyExtractor ={item =>`key-${item.id}`}
         />

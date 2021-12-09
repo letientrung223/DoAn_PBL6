@@ -10,8 +10,9 @@ import {TouchableOpacity} from "react-native-gesture-handler";
 import 'react-native-gesture-handler';
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
-import asset from "../../../assets/asset";
+import asset from "../../../assets/images/index";
 import COLORS from "../../consts/colors";
+
 const SignInScreen = ({navigation}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

@@ -4,8 +4,9 @@ import { View, Image, StyleSheet,Text } from "react-native";
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
-import asset from "../../../assets/asset";
+import asset from "../../../assets/images/index";
 import COLORS from "../../consts/colors"
+
 const SignUpScreen = ({navigation}) => {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");

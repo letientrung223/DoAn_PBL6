@@ -11,9 +11,11 @@ import {
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { FontAwesome } from "@expo/vector-icons";
-import COLORS from "../../../src/consts/colors";
-import { PrimaryButton } from "../../../src/components/Button";
-import cloths from "../../../src/consts/cloths";
+
+import COLORS from "../../consts/colors";
+
+import { PrimaryButton } from "../../../app/components/Button";
+// import cloths from "../../../src/consts/cloths";
 const Cart = ({ navigation }) => {
   const [isSelected, setSelection] = useState(false);
   

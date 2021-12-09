@@ -1,4 +1,4 @@
-import { GET_ALL_PRODUCTS } from '../types';
+import { GET_ALL_PRODUCTS } from "./actionType";
 import { request } from '../../config/api';
 import { endpoints } from '../../config/endpoint';
 
@@ -12,5 +12,5 @@ export const getProductList = (products) => ({
     type: GET_ALL_PRODUCTS,
     payload: products
   })
-})
+}})
 

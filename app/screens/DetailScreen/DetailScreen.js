@@ -3,7 +3,9 @@ import {SafeAreaView, StyleSheet, View, Text, Image} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 
 import { MaterialIcons } from '@expo/vector-icons';
-import COLORS from '../../consts/colors';
+
+import COLORS from "../../consts/colors";
+
 import {SecondaryButton} from '../../components/Button';
 
 const DetailScreen = ({navigation, route}) => {

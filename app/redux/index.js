@@ -9,3 +9,4 @@ const reducer = combineReducers({
 const store = createStore(reducer, compose(applyMiddleware(thunk)));
 
 export default store;
+
