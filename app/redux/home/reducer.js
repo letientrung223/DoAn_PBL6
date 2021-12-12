@@ -5,7 +5,7 @@ import {
 } from "./actionType";
 
 const initialState = {
-  
+
   products: [],
   error: null,
   loading: false,
@@ -25,8 +25,7 @@ export const homeReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         loading: false,
-        // products: action.payload.products,
-        products: action.payload,
+        products: action.payload.products,
         error: null,
       };
     }

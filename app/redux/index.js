@@ -1,7 +1,6 @@
 import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunk from "redux-thunk";
-import homeState from "./home/reducer";
-
+import homeReducer from "./home/reducer";
 
 const rootReducer = combineReducers({ homeState });
 

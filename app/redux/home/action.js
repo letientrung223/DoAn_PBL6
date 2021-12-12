@@ -7,8 +7,8 @@ import axios from "axios";
 
 export const fetchProductList = () => {
   return async (dispatch) => {
+    dispatch(fetchProduct())
     try {
-
       axios.get("https://shop-pbl6.herokuapp.com/api/v1/products").then(response => {
         console.log(response);
         const products = response.data.data;
@@ -35,7 +35,7 @@ const fetchProductSuccess = (products) => {
   };
 };
 
-const fetchProductError = (error) => {
+const fetchProductFailed = (error) => {
   return {
     type: FETCH_PRODUCT_FAILED,
     payload: {

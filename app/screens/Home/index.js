@@ -172,7 +172,7 @@ const Home = ({ navigation }) => {
   // ====================================================
 
 
-  const productList = useSelector(state => state.products)
+  const productList = useSelector(state => {state.cartReducer.} )
   console.log(productList);
 
   return (
