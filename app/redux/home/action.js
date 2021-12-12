@@ -3,16 +3,23 @@ import {
   FETCH_PRODUCT_SUCCESS,
   FETCH_PRODUCT_FAILED,
 } from "./actionType";
-import { fetchProductList } from "../../services/productService";
 
-export const getProducts = () => {
-  return (dispatch) => {
-    dispatch(fetchProducts);
-    fetchProductList().then((products) =>
-      dispatch(fetchProductSuccess(products)).then((error) =>
-        dispatch(fetchProductError(error))
-      )
-    );
+import axios from "axios";
+
+export const fetchProductList = () => {
+  return async (dispatch) => {
+    try {
+
+      axios.get("https://shop-pbl6.herokuapp.com/api/v1/products").then(response => {
+        console.log(response);
+        const products = response.data.data;
+        dispatch(fetchProductSuccess(products));
+      }).catch(err => {
+        dispatch(fetchProductFailed(err));
+      })
+    } catch (error) {
+      dispatch(fetchProductFailed(err));
+    }
   };
 };
 

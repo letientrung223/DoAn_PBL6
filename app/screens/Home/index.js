@@ -23,7 +23,7 @@ import categories from "../../consts/categories";
 import brands from "../../consts/brands";
 // import cloths from "./../../consts/cloths";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../redux/home/action";
+import { fetchProductList } from "../../redux/home/action";
 
 const { width } = Dimensions.get("screen");
 const cardWidth = width / 2 - 20;
@@ -35,8 +35,12 @@ const Home = ({ navigation }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getProducts);
-  }, []);
+    getListProducts();
+  });
+
+  const getListProducts = () => {
+    dispatch(fetchProductList());
+  }
 
   const ListCategories = () => {
     return (
@@ -166,6 +170,10 @@ const Home = ({ navigation }) => {
   };
   // ====================================================
 
+
+  const productList = useSelector(state => state.products)
+  console.log(productList);
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       {/* Phan Logo va User */}
@@ -226,8 +234,7 @@ const Home = ({ navigation }) => {
           data={productList}
           renderItem={({ item }) => <Card cloth={item} />}
           keyExtractor={(item) => `key-${item.id}`}
-        /> */}
-        {/* )} */}
+        />  */}
       </ScrollView>
     </SafeAreaView>
   );
