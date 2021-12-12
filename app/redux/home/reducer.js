@@ -22,11 +22,13 @@ export const homeReducer = (state = initialState, action = {}) => {
       };
     }
     case FETCH_PRODUCT_SUCCESS: {
+      //console.log(action.payload.products)
       return {
         ...state,
         loading: false,
         products: action.payload.products,
         error: null,
+        
       };
     }
     case FETCH_PRODUCT_FAILED: {

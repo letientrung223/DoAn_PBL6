@@ -9,7 +9,8 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import asset from "../../../assets/images"; //?
+import { LogBox } from 'react-native';
+import asset from "../../../assets/images";
 import COLORS from "../../consts/colors";
 import {
   FlatList,
@@ -32,16 +33,15 @@ const Home = ({ navigation }) => {
   const [selectedBrandIndex, setSelectedBrandIndex] = React.useState(0);
 
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     getListProducts();
-  });
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+  }, [dispatch]);
 
   const getListProducts = () => {
     dispatch(fetchProductList());
-  }
-
-  const {productList,error,loading } = useSelector((state) => state.homeReducer)
+  };
 
   const ListCategories = () => {
     return (
@@ -142,15 +142,25 @@ const Home = ({ navigation }) => {
       >
         <View style={styles.card}>
           <View style={{ alignItems: "center", top: 2 }}>
-            <Image source={cloth.image} style={{ height: 120, width: 130 }} />
+            <Image source={{uri: cloth.imageCover}} style={{ height: 120, width: 130 }} />
           </View>
           <View style={{ marginHorizontal: 20 }}>
-            <Text style={{ fontSize: 18, fontWeight: "bold", paddingTop: 10 }}>
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: "bold",
+                paddingTop: 10,
+
+                // textOverflow: "ellipsis",
+                // webkitLineClamp: 3,
+                // webkitBoxOrient: "vertical",
+                // display: "-webkit-box",
+              }}  numberOfLines={1}
+            >
               {cloth.name}
             </Text>
             <Text style={{ fontSize: 14, color: COLORS.grey, marginTop: 2 }}>
-              {/* {cloth.brand} */}
-              {cloth.name}
+              {cloth.brand}
             </Text>
           </View>
           <View
@@ -171,9 +181,7 @@ const Home = ({ navigation }) => {
   };
   // ====================================================
 
-
-  const productList = useSelector(state => {state.cartReducer.} )
-  console.log(productList);
+  const productList = useSelector((state) => state.homeReducer.products);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
@@ -229,13 +237,12 @@ const Home = ({ navigation }) => {
         </View>
         {/*Load product card */}
         {/* //{isloading ? <ActivityIndicator/>: ( */}
-        {/* <FlatList
+        <FlatList
           showsVerticalScrollIndicator={false}
           numColumns={2}
           data={productList}
           renderItem={({ item }) => <Card cloth={item} />}
-          keyExtractor={(item) => `key-${item.id}`}
-        />  */}
+        />
       </ScrollView>
     </SafeAreaView>
   );
@@ -322,4 +329,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
+
+
 export default Home;

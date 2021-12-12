@@ -1,9 +1,7 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, View, Text, Image} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
-
+import {ScrollView,FlatList} from 'react-native-gesture-handler';
 import { MaterialIcons } from '@expo/vector-icons';
-
 import COLORS from "../../consts/colors";
 
 import {SecondaryButton} from '../../components/Button';
@@ -13,7 +11,32 @@ const DetailScreen = ({navigation, route}) => {
     console.warn("Add To Card");
   };
   const item = route.params;
+  console.log(item.images);
+  const ListIMG = () => {
+    return (
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={style.categoriesListContainer}
+      >
+        {(item.images).map((img, index) => (
+              <View style={style.brandBtnImgCon}>
+                <Image
+                  source={{uri:img}}
+                  style={{
+                    height: 250,
+                    width: 250,
+                    resizeMode: "cover",
+                    
 
+                  }}
+                />
+              </View>
+            
+        ))}
+      </ScrollView>
+    );
+  };
   return (
     <SafeAreaView style={{backgroundColor: COLORS.white, marginTop:30}}>
       <View style={style.header}>
@@ -27,7 +50,8 @@ const DetailScreen = ({navigation, route}) => {
             alignItems: 'center',
             height: 280,
           }}>
-          <Image source={item.image} style={{height: 220, width: 220}} />
+          <ListIMG/>
+
         </View>
         <View style={style.details}>
           <View
@@ -40,12 +64,12 @@ const DetailScreen = ({navigation, route}) => {
               style={{fontSize: 25, fontWeight: 'bold', color: COLORS.white}}>
               {item.name}
             </Text>
-            <View style={style.iconContainer}>
+            {/* <View style={style.iconContainer}>
               <MaterialIcons name="favorite-border" color={COLORS.primary} size={25} />
-            </View>
+            </View> */}
           </View>
           <Text style={style.detailsText}>
-            {item.detail}
+            {item.description}
           </Text>
           <View style={{marginTop: 40, marginBottom: 40}}>
             <SecondaryButton title="Add To Cart" onPress={onAddToCard}/>
@@ -62,11 +86,12 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: 20,
+    paddingBottom: 10,
   },
   details: {
     paddingHorizontal: 20,
     paddingTop: 40,
-    paddingBottom: 175,
+    paddingBottom: 170,
     backgroundColor: COLORS.primary,
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
@@ -84,6 +109,19 @@ const style = StyleSheet.create({
     lineHeight: 22,
     fontSize: 16,
     color: COLORS.white,
+  },
+  categoriesListContainer: {
+    paddingVertical: 1,
+    alignItems: "center",
+    paddingHorizontal: 50,
+  },
+  brandBtnImgCon: {
+    height: 300,
+    width: 300,
+    // backgroundColor: COLORS.dark,
+    borderRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
