@@ -3,7 +3,6 @@ import {
   FETCH_PRODUCT_SUCCESS,
   FETCH_PRODUCT_FAILED,
 } from "./actionType";
-
 import axios from "axios";
 
 export const fetchProductList = () => {

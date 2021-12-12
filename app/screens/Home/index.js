@@ -21,7 +21,6 @@ import {
 
 import categories from "../../consts/categories";
 import brands from "../../consts/brands";
-// import cloths from "./../../consts/cloths";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductList } from "../../redux/home/action";
 
@@ -33,7 +32,7 @@ const Home = ({ navigation }) => {
   const [selectedBrandIndex, setSelectedBrandIndex] = React.useState(0);
 
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     getListProducts();
   });
@@ -41,6 +40,8 @@ const Home = ({ navigation }) => {
   const getListProducts = () => {
     dispatch(fetchProductList());
   }
+
+  const {productList,error,loading } = useSelector((state) => state.homeReducer)
 
   const ListCategories = () => {
     return (

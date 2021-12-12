@@ -6,7 +6,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Provider } from "react-redux";
 import HomeToDetail from "./app/navigators/hometodetail";
 import store from "./app/redux";
-const Stack = createStackNavigator();
 
 export default function App() {
   return (

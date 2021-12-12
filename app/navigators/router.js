@@ -24,7 +24,7 @@ function Moving() {
   return (
 
     <Stack.Navigator
-      initialRouteName="User"
+      initialRouteName="SignInScreen"
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="SignInScreen" component={SignInScreen} />
