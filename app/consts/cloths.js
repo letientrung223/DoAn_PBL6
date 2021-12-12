@@ -1,4 +1,4 @@
-import asset from "../../assets/asset";
+
 
 const cloths = [
     // {id: '1', name: 'Suit',         ingredients: 'cotton',    price: '120', image:asset.suit,        detail:'Monochrome elegance. Made with a relaxed wide-leg, these trousers are made from a sustainable soft organic cotton with a mechanical stretch making the garment easily recycled.'}, 

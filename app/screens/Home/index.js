@@ -21,10 +21,8 @@ import {
 
 import categories from "../../consts/categories";
 import brands from "../../consts/brands";
-// import cloths from "./../../consts/cloths";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/home/action";
-
 const { width } = Dimensions.get("screen");
 const cardWidth = width / 2 - 20;
 
@@ -33,10 +31,12 @@ const Home = ({ navigation }) => {
   const [selectedBrandIndex, setSelectedBrandIndex] = React.useState(0);
 
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
-    dispatch(getProducts);
+    dispatch(getProducts());
   }, []);
+
+  const {productList,error,loading } = useSelector((state) => state.homeReducer)
 
   const ListCategories = () => {
     return (
@@ -220,14 +220,13 @@ const Home = ({ navigation }) => {
         </View>
         {/*Load product card */}
         {/* //{isloading ? <ActivityIndicator/>: ( */}
-        {/* <FlatList
+        <FlatList
           showsVerticalScrollIndicator={false}
           numColumns={2}
           data={productList}
           renderItem={({ item }) => <Card cloth={item} />}
-          keyExtractor={(item) => `key-${item.id}`}
-        /> */}
-        {/* )} */}
+        />
+        
       </ScrollView>
     </SafeAreaView>
   );

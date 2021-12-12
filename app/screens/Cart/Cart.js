@@ -15,7 +15,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import COLORS from "../../consts/colors";
 
 import { PrimaryButton } from "../../../app/components/Button";
-// import cloths from "../../../src/consts/cloths";
+ import cloths from "../../consts/cloths";
 const Cart = ({ navigation }) => {
   const [isSelected, setSelection] = useState(false);
   

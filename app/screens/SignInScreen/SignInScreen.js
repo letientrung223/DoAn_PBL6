@@ -13,11 +13,13 @@ import CustomButton from "../../components/CustomButton";
 import asset from "../../../assets/images/index";
 import COLORS from "../../consts/colors";
 
+
 const SignInScreen = ({navigation}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const onSignInPressed = () => {
-    console.warn("Sign in");
+  const onSignInPressed = (username,password) => {
+    console.warn("Sign in voi ", username, password);
+    
   };
   const onSignInWithGGPressed = () => {
     console.warn("Sign in with GG");
@@ -31,14 +33,14 @@ const SignInScreen = ({navigation}) => {
   return (
     <View style={styles.root}>
       <Image
-        source={asset.logo}
+        source={asset.common.logo}
         style={{ width: '70%', height: 159 }}
         resizeMode="contain"
       />
       <CustomInput
         placeholder="Your email address"
         value={email}
-        setValue={setEmail}
+        setValue={setEmail} 
       />
       <CustomInput
         placeholder="Your password"
@@ -47,7 +49,7 @@ const SignInScreen = ({navigation}) => {
         secureTextEntry={true}
       />
 
-      <CustomButton text="Sign in" onPress={onSignInPressed} />
+      <CustomButton text="Sign in" onPress={onSignInPressed(email, password)} />
       <CustomButton
         text="Forgot Password?"
         onPress={onForgotPassWordPressed}

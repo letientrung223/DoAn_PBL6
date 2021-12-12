@@ -5,12 +5,13 @@ import {
 } from "./actionType";
 
 const initialState = {
-  loading: false,
+  
   products: [],
   error: null,
+  loading: false,
 };
 
-export default homeReducer = (state = initialState, action = {}) => {
+export const homeReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case FETCH_PRODUCT: {
       return {
@@ -24,7 +25,8 @@ export default homeReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         loading: false,
-        products: action.payload.products,
+        // products: action.payload.products,
+        products: action.payload,
         error: null,
       };
     }

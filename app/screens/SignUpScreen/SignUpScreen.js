@@ -23,7 +23,7 @@ const SignUpScreen = ({navigation}) => {
   return (
     <View style={styles.root}>
       <Image
-        source={asset.logo}
+        source={asset.common.logo}
         style={{ width: "70%", height: 159 }}
         resizeMode="contain"
       />
