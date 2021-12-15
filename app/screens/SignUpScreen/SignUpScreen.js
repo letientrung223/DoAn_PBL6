@@ -11,14 +11,12 @@ const SignUpScreen = ({navigation}) => {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [repassword, setRepassword] = useState("");
   
   const onSignUpPressed = () => {
     console.warn("Sign up");
   };
 
-  const onSignInPressed = () => {
-    console.warn("Change screen");
-  };
 
   return (
     <View style={styles.root}>
@@ -41,6 +39,12 @@ const SignUpScreen = ({navigation}) => {
         placeholder="Your password"
         value={password}
         setValue={setPassword}
+        secureTextEntry={true}
+      />
+       <CustomInput
+        placeholder="Re-password"
+        value={repassword}
+        setValue={setRepassword}
         secureTextEntry={true}
       />
 

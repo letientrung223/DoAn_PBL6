@@ -16,7 +16,8 @@ import { ScrollView } from "react-native-gesture-handler";
 import asset from "../../../assets/images/index";
 import CustomButton from "../../components/CustomButton";
 import COLORS from "../../consts/colors";
-
+import {postCheckLogout,} from "../../redux/login/action";
+import { useDispatch, useSelector } from "react-redux";
 
 // const ListSelect = [
 //   { id: "Dashboard",      title: " Dashboard",       icons: "home-outline" },
@@ -37,7 +38,11 @@ import COLORS from "../../consts/colors";
 //   </TouchableOpacity>
 // );
 const ChangePassword = ({navigation}) => {
-
+  const dispatch =useDispatch();
+  const onLogOut = () => {
+    dispatch(postCheckLogout());
+    
+  };  
   const onSavePressed = () => {
     console.warn("Saved");
   };
@@ -62,7 +67,7 @@ const ChangePassword = ({navigation}) => {
     <ScrollView style={{marginTop:60}}>
       <View style={styles.header}>
         <Image
-          source={asset.logo}
+          source={asset.common.logo}
           style={{ width: 176, height: 42 }}
           resizeMode="contain"
         />
@@ -109,7 +114,7 @@ const ChangePassword = ({navigation}) => {
             <Text style={{fontSize:24}}> Change Password</Text>
           </View> 
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>{}} 
+        <TouchableOpacity onPress={()=>onLogOut()} 
             style={{ backgroundColor:'#E2E2E2',height:50,padding:10,marginHorizontal:10,marginTop:5}} >
           <View style={{flexDirection: "row",alignItems: "center"}}>
             <Ionicons name='log-out' size={26} color="black" /> 
@@ -156,6 +161,7 @@ const ChangePassword = ({navigation}) => {
 };
 const styles = StyleSheet.create({
   header: {
+    alignItems: "center",
     paddingLeft: 16,
   },
   avt: {

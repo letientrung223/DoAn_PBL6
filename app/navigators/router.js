@@ -15,29 +15,46 @@ import AccountDetail from "../screens/AccountDetail";
 import ChangePassword from "../screens/ChangePassword";
 import OrderScreen from "../screens/OrderScreen";
 import DetailScreen from "../screens/DetailScreen";
+import { useDispatch, useSelector } from "react-redux";
 
 const Tab = createBottomTabNavigator();
 
 const Stack = createStackNavigator();
+// const dispatch = useDispatch();
 
-function Moving() {
+
+
+function SignInSignUp() {  
   return (
-
+    
     <Stack.Navigator
-      initialRouteName="SignInScreen"
+      initialRouteName= {"SignInScreen"}
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="SignInScreen" component={SignInScreen} />
       <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-      <Stack.Screen name="User" component={User} />
-      <Stack.Screen name="OrderScreen" component={OrderScreen} />
-      <Stack.Screen name="AccountDetail" component={AccountDetail} />
-      <Stack.Screen name="ChangePassword" component={ChangePassword} />
     </Stack.Navigator>
   );
 }
+function Profile() {
+  
+    return (
+      
+      <Stack.Navigator
+        initialRouteName= {"User"}
+        screenOptions={{ headerShown: false }}
+      >
+        <Stack.Screen name="User" component={User} />
+        <Stack.Screen name="OrderScreen" component={OrderScreen} />
+        <Stack.Screen name="AccountDetail" component={AccountDetail} />
+        <Stack.Screen name="ChangePassword" component={ChangePassword} />
+      </Stack.Navigator>
+    );
+  }
 
 function Router() {
+  const tokenVN = useSelector((state) => state.loginReducer.tokenVN);
+  // console.log("token:  ",tokenVN);
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -89,7 +106,7 @@ function Router() {
       />
       <Tab.Screen
         name="Profile"
-        component={Moving}
+        component={(tokenVN=="")?SignInScreen:Profile}
         options={{
           tabBarIcon: ({ size, color }) => (
             <FontAwesome name="user" size={size} color={color} />

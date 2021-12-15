@@ -1,9 +1,14 @@
 import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunk from "redux-thunk";
 import {homeReducer} from "./home/reducer";
-
+import {loginReducer} from "./login/reducer"
+import {signupReducer} from "./signup/reducer"
+import {orderReducer} from "./order/reducer"
 const rootReducer = combineReducers({ 
   homeReducer,
+  loginReducer,
+  signupReducer,
+  orderReducer,
  });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import {
   View,
   Text,
@@ -10,31 +10,49 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-
 import { ScrollView } from "react-native-gesture-handler";
- import asset from "../../../assets/images/index";
+import asset from "../../../assets/images/index";
 import COLORS from "../../consts/colors";
-
 import orderList from "./../../consts/orderlist";
+import {postCheckLogout,} from "../../redux/login/action";
+import { useDispatch, useSelector } from "react-redux";
 const { width } = Dimensions.get("screen");
 const cardWidth = width - 20;
+import { fetchOrdersList } from "../../redux/order/action";
 
 const Order = ({ navigation }) => {
+  
+  const dispatch =useDispatch();
+  
+  const onLogOut = () => {
+    dispatch(postCheckLogout());
+  }; 
+  
+  useEffect(()=>{
+    getListOrders();
+  },[dispatch]);
+
+
+  const getListOrders = () => {
+    dispatch(fetchOrdersList());
+  };
+  const ordersList = useSelector((state) => state.orderReducer.orders);
+  console.log("danh sách order ",ordersList);
   const Card = ({ order }) => {
     return (
       <View style={styles.card}>
-          <Text style={{ fontSize: 20, fontWeight: "normal", paddingTop: 10 }}>
-            ID: {order.id}
-          </Text>
-          <Text style={{ fontSize: 20, fontWeight: "normal", paddingTop: 10 }}>
-            DATE: {order.date}
-          </Text>
-          <Text style={{ fontSize: 20, fontWeight: "normal", paddingTop: 10 }}>
-            STATUS: {order.status}
-          </Text>
-          <Text style={{ fontSize: 20, fontWeight: "normal", paddingTop: 10 }}>
-            TOTAL: {order.total}
-          </Text>
+        <Text style={{ fontSize: 20, fontWeight: "normal", paddingTop: 10 }}>
+          ID: {order.id}
+        </Text>
+        <Text style={{ fontSize: 20, fontWeight: "normal", paddingTop: 10 }}>
+          DATE: {order.date}
+        </Text>
+        <Text style={{ fontSize: 20, fontWeight: "normal", paddingTop: 10 }}>
+          STATUS: {order.status}
+        </Text>
+        <Text style={{ fontSize: 20, fontWeight: "normal", paddingTop: 10 }}>
+          TOTAL: {order.total}
+        </Text>
 
         <View
           style={{
@@ -45,7 +63,7 @@ const Order = ({ navigation }) => {
           }}
         >
           {/* navigate đến trang order detail */}
-          <TouchableOpacity onPress={() => {}}> 
+          <TouchableOpacity onPress={() => {}}>
             <Text> View Detail</Text>
           </TouchableOpacity>
         </View>
@@ -56,7 +74,7 @@ const Order = ({ navigation }) => {
     <ScrollView style={{ marginTop: 60 }}>
       <View style={styles.header}>
         <Image
-          source={asset.logo}
+          source={asset.common.logo}
           style={{ width: 176, height: 42 }}
           resizeMode="contain"
         />
@@ -135,7 +153,7 @@ const Order = ({ navigation }) => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={() => onLogOut()}
           style={{
             backgroundColor: "#E2E2E2",
             height: 50,
@@ -170,6 +188,7 @@ const Order = ({ navigation }) => {
 };
 const styles = StyleSheet.create({
   header: {
+    alignItems: "center",
     paddingLeft: 16,
   },
   avt: {
@@ -216,13 +235,13 @@ const styles = StyleSheet.create({
   card: {
     height: 200,
     width: cardWidth,
-    paddingLeft:10,
+    paddingLeft: 10,
     marginLeft: 10,
     marginBottom: 5,
     marginTop: 20,
     borderRadius: 15,
     elevation: 13,
-    justifyContent:"flex-start",
+    justifyContent: "flex-start",
     backgroundColor: COLORS.grey_light,
   },
 });

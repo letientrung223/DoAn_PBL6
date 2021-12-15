@@ -15,50 +15,26 @@ import { ScrollView } from "react-native-gesture-handler";
 import asset from "../../../assets/images/index";
 import CustomButton from "../../components/CustomButton";
 import COLORS from "../../consts/colors"
+import {postCheckLogout,} from "../../redux/login/action";
+import { useDispatch, useSelector } from "react-redux";
 
-// const ListSelect = [
-//   { id: "Dashboard",      title: " Dashboard",       icons: "home-outline" },
-//   { id: "Order",          title: " Order",           icons: "cart-outline" },
-//   { id: "Account Detail", title: " Account Detail",  icons: "person-outline" },
-//   { id: "Change Password",title: "Change Password", icons: "key-outline" },
-//   { id: "Log out",        title: " Log out",         icons: "log-out-outline" },
-// ];
-// const Item = ({ item, onPress, backgroundColor, textColor }) => (
-//   <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-//     <View>
-//       <Ionicons name={item.icons} size={26} color="black" />
-//     </View>
-//     <View>
-//       <Text style={[styles.text, textColor]}> {item.title}</Text>
-//     </View>
-//   </TouchableOpacity>
-// );
+
+
 const User = ({navigation}) => {
-  const onSubscribePressed = () => {
-    Alert("Da dang ki");
-  };
-
-  // const [selectedId, setSelectedId] = useState(null);
-  // const renderItem = ({ item }) => {
-  //   const backgroundColor = item.id === selectedId ? "#9C9999" : "#E2E2E2";
-  //   const color = item.id === selectedId ? "white" : "black";
-
-  //   return (
-  //     <Item
-  //       item={item}
-  //       onPress={() => setSelectedId(item.id)}
-  //       backgroundColor={{ backgroundColor }}
-  //       textColor={{ color }}
-  //     />
-  //   );
-  // };
-
+  const dispatch =useDispatch();
+  const onLogOut = () => {
+    dispatch(postCheckLogout());
+    
+  };  
+const onSubscribePressed = () => {
+  console.warn("Da dang ki");
+};
   return (
     <ScrollView style={{marginTop:60}}>
       <View style={styles.header}>
         <Image
-          source={asset.logo}
-          style={{ width: 176, height: 42 }}
+          source={asset.common.logo}
+          style={{ width: 176, height: 42 ,alignItems: "center"}}
           resizeMode="contain"
         />
       </View>
@@ -70,12 +46,7 @@ const User = ({navigation}) => {
         />
       </View>
       <SafeAreaView>
-        {/* <FlatList
-          data={ListSelect}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          extraData={selectedId}
-        /> */}
+       
         <TouchableOpacity onPress={()=>{}} 
             style={{ backgroundColor:COLORS.grey,height:50,padding:10,marginHorizontal:10,marginTop:5}} >
           <View style={{flexDirection: "row",alignItems: "center"}}>
@@ -104,7 +75,7 @@ const User = ({navigation}) => {
             <Text style={{fontSize:24}}> Change Password</Text>
           </View> 
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>{}} 
+        <TouchableOpacity onPress={()=>onLogOut()} 
             style={{ backgroundColor:'#E2E2E2',height:50,padding:10,marginHorizontal:10,marginTop:5}} >
           <View style={{flexDirection: "row",alignItems: "center"}}>
             <Ionicons name='log-out' size={26} color="black" /> 
@@ -164,7 +135,7 @@ const User = ({navigation}) => {
 };
 const styles = StyleSheet.create({
   header: {
-   
+    alignItems: "center",
     paddingLeft: 16,
   },
   avt: {

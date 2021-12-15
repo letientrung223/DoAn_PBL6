@@ -24,7 +24,6 @@ import categories from "../../consts/categories";
 import brands from "../../consts/brands";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductList } from "../../redux/home/action";
-
 const { width } = Dimensions.get("screen");
 const cardWidth = width / 2 - 20;
 
@@ -35,10 +34,13 @@ const Home = ({ navigation }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+
     getListProducts();
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+    
+    
   }, [dispatch]);
-
+   
   const getListProducts = () => {
     dispatch(fetchProductList());
   };
@@ -199,10 +201,10 @@ const Home = ({ navigation }) => {
             <Image style={styles.Logo} source={asset.common.logo} />
           </View>
         </View>
-        <Image
+        {/* <Image
           source={asset.common.person}
           style={{ height: 35, width: 35, borderRadius: 25 }}
-        />
+        /> */}
       </View>
       <ScrollView>
         {/* Phan List Categories */}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect  } from "react";
 import {
   View,
   Text,
@@ -12,13 +12,21 @@ import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import asset from "../../../assets/images/index";
 import COLORS from "../../consts/colors";
+import { useDispatch, useSelector } from "react-redux";
+import {postCheckLogin} from "../../redux/login/action";
+// import { AsyncStorage } from '@react-native-async-storage/async-storage';
 
 
 const SignInScreen = ({navigation}) => {
+const dispatch =useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // console.log(AsyncStorage.getItem('user'));
   const onSignInPressed = (username,password) => {
-    console.warn("Sign in voi ", username, password);
+    // console.warn("Sign in");
+    
+    dispatch(postCheckLogin(username, password));
     
   };
   const onSignInWithGGPressed = () => {
@@ -49,7 +57,11 @@ const SignInScreen = ({navigation}) => {
         secureTextEntry={true}
       />
 
-      <CustomButton text="Sign in" onPress={onSignInPressed(email, password)} />
+      <CustomButton 
+        text="Sign in" 
+        onPress={()=> onSignInPressed(email, password)}
+         />
+      
       <CustomButton
         text="Forgot Password?"
         onPress={onForgotPassWordPressed}
