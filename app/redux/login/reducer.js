@@ -4,6 +4,7 @@ import {
   LOGIN_USER_FAILED,LOGOUT_USER
 } from "./actionType";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const initialState = {
   error: null,
   name: '',
@@ -45,6 +46,7 @@ export const loginReducer = (state = initialState, action = {}) => {
       };
     }
     case LOGOUT_USER:{
+      AsyncStorage.removeItem('@storage_Key');
       return {
       ...state,
       tokenVN:"",

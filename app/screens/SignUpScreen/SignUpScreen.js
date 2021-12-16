@@ -6,15 +6,22 @@ import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import asset from "../../../assets/images/index";
 import COLORS from "../../consts/colors"
+import { useDispatch, useSelector } from "react-redux";
+
+import {postCheckSignUp} from "../../redux/signup/action";
 
 const SignUpScreen = ({navigation}) => {
+const dispatch =useDispatch();
+
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repassword, setRepassword] = useState("");
   
-  const onSignUpPressed = () => {
-    console.warn("Sign up");
+  const onSignUpPressed = (username,email, password,repassword) => {
+
+    dispatch(postCheckSignUp(username,email, password,repassword));
+    console.log("onSignUpPressed with ",username,email,password,repassword); 
   };
 
 
@@ -48,7 +55,9 @@ const SignUpScreen = ({navigation}) => {
         secureTextEntry={true}
       />
 
-      <CustomButton text="Sign up" onPress={onSignUpPressed} />
+      <CustomButton 
+        text="Sign up" 
+        onPress={()=>onSignUpPressed(username,email,password,repassword)} />
       
       <View
           style={{

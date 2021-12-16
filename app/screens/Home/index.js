@@ -119,8 +119,8 @@ const Home = ({ navigation }) => {
                 <Image
                   source={brand.image}
                   style={{
-                    height: 30,
-                    width: 30,
+                    height: 100,
+                    width: 100,
                     resizeMode: "cover",
                     borderRadius: 10,
                   }}
@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
   },
   brandBtn: {
     height: 150,
-    width: 150,
+    width: 250,
     marginRight: 7,
     borderRadius: 30,
     alignItems: "center",
@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
   },
   brandBtnImgCon: {
     height: 140,
-    width: 140,
+    width: 240,
     backgroundColor: COLORS.dark,
     borderRadius: 30,
     justifyContent: "center",

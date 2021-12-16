@@ -28,7 +28,7 @@ export const postCheckLogin = (username, password) => {
           "password":password
         })
         .then((response) => {
-       
+          console.log(response.status);
           const email = response.data.data.user.email;
           const tokenVN = response.data.token;
           const name = response.data.data.user.name;
@@ -36,6 +36,7 @@ export const postCheckLogin = (username, password) => {
           dispatch(loginUserSuccess(email, tokenVN, name));
         })
         .catch((err) => {
+          console.log("loi",err)
           dispatch(loginUserFailed(err));
         });
     } catch (error) {

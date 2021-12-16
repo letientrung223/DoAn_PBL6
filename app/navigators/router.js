@@ -57,7 +57,7 @@ function Profile() {
 
 function Router() {
   const tokenVN = useSelector((state) => state.loginReducer.tokenVN);
-  console.log(tokenVN);
+  //console.log(tokenVN);
   return (
     <Tab.Navigator
       initialRouteName="Home"

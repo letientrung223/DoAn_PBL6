@@ -22,18 +22,16 @@ const dispatch =useDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // console.log(AsyncStorage.getItem('user'));
   const onSignInPressed = (username,password) => {
-    // console.warn("Sign in");
     
     dispatch(postCheckLogin(username, password));
     
   };
   const onSignInWithGGPressed = () => {
-    console.warn("Sign in with GG");
+    console.warn("currently not supported ");
   };
   const onSignInWithFBPressed = () => {
-    console.warn("Sign in with Fb");
+    console.warn("currently not supported");
   };
   const onForgotPassWordPressed = () => {
     console.warn("Forgot Password");
@@ -97,7 +95,7 @@ const dispatch =useDispatch();
           </Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignUpScreen')}>
             <Text style={{color: COLORS.dark, fontWeight: 'bold'}}>
-              Sign up
+                Sign up
             </Text>
           </TouchableOpacity>
         </View>

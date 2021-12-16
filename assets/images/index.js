@@ -30,6 +30,8 @@ export default {
     shosio: require("./brands/shosio.png"),
     shovia: require("./brands/shovia.png"),
     tyrant: require("./brands/tyrant.png"),
+    adidas: require("./brands/adidas.png"),
+    nike: require("./brands/nike.png"),
   },
   categories: {
     watch: require("../images/categories/watch.png"),
@@ -40,5 +42,7 @@ export default {
     kids: require("../images/categories/kids.png"),
     sports: require("../images/categories/sports.png"),
     bags: require("../images/categories/bags.png"),
+    pants: require("../images/categories/pants.png"),
+    shirt: require("../images/categories/shirt.png"),
   },
 };

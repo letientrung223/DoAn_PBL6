@@ -7,7 +7,7 @@ import {
 import axios from "axios";
 
 
-export const postCheckLogin = (name,email, password,repassword) => {
+export const postCheckSignUp = (name,email, password,repassword) => {
   return async (dispatch) => {
     dispatch(signupUser(name,email, password,repassword));
     try {
@@ -15,12 +15,12 @@ export const postCheckLogin = (name,email, password,repassword) => {
         .post("https://shop-pbl6.herokuapp.com/api/v1/users/signup",
         {
           "name": name,
-          "email":username, 
+          "email":email, 
           "password":password,
           "passwordConfirm":repassword,
         })
         .then((response) => {
-          //console.log(response);
+          console.log("phan hoi sign up ", response);
           const status = response.status;
           const message = response.message;
           
@@ -30,7 +30,7 @@ export const postCheckLogin = (name,email, password,repassword) => {
           dispatch( signupUserFailed(err));
         });
     } catch (error) {
-      dispatch( signupUserFailed(err));
+      dispatch( signupUserFailed(error));
     }
   };
 };

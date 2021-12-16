@@ -20,39 +20,24 @@ import COLORS from "../../consts/colors";
 
 import {postCheckLogout,} from "../../redux/login/action";
 import { useDispatch, useSelector } from "react-redux";
-// const ListSelect = [
-//   { id: "Dashboard",      title: " Dashboard",       icons: "home-outline" },
-//   { id: "Order",          title: " Order",           icons: "cart-outline" },
-//   { id: "Account Detail", title: " Account Detail",  icons: "person-outline" },
-//   { id: "Change Password",title: "Change Password",  icons: "key-outline" },
-//   { id: "Log out",        title: " Log out",         icons: "log-out-outline" },
+
+// const radioButtonsData = [
+//   {
+//     id: '1',
+//     label: 'Male',
+//     value: 'option1',
+//     color: '#9C9999',
+//     selected: true,
+//   },
+//   {
+//     id: '2',
+//     label: 'Female',
+//     value: 'option2',
+//     color: '#9C9999',
+//     selected: false,
+//   },
 // ];
-const radioButtonsData = [
-  {
-    id: '1',
-    label: 'Male',
-    value: 'option1',
-    color: '#9C9999',
-    selected: true,
-  },
-  {
-    id: '2',
-    label: 'Female',
-    value: 'option2',
-    color: '#9C9999',
-    selected: false,
-  },
-];
-// const Item = ({ item, onPress, backgroundColor, textColor }) => (
-//   <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-//     <View>
-//       <Ionicons name={item.icons} size={26} color="black" />
-//     </View>
-//     <View>
-//       <Text style={[styles.text, textColor]}> {item.title}</Text>
-//     </View>
-//   </TouchableOpacity>
-// );
+
 const AccountDetail = ({navigation}) => {
   const dispatch =useDispatch();
   const onLogOut = () => {
@@ -63,25 +48,10 @@ const AccountDetail = ({navigation}) => {
     console.warn("Saved");
   };
 
-  const [radioButtons, setRadioButtons] = useState(radioButtonsData);
-  const onPressRadioButton = radioButtonsArray => {
-    console.log(radioButtonsArray);
-    setRadioButtons(radioButtonsArray);
-  };
-
-  // const [selectedId, setSelectedId] = useState(null);
-  // const renderItem = ({ item }) => {
-  //   const backgroundColor = item.id === selectedId ? "#9C9999" : "#E2E2E2";
-  //   const color = item.id === selectedId ? "white" : "black";
-
-  //   return (
-  //     <Item
-  //       item={item}
-  //       onPress={() => setSelectedId(item.id)}
-  //       backgroundColor={{ backgroundColor }}
-  //       textColor={{ color }}
-  //     />
-  //   );
+  // const [radioButtons, setRadioButtons] = useState(radioButtonsData);
+  // const onPressRadioButton = radioButtonsArray => {
+  //   console.log(radioButtonsArray);
+  //   setRadioButtons(radioButtonsArray);
   // };
 
   return (
@@ -102,12 +72,6 @@ const AccountDetail = ({navigation}) => {
         />
       </View>
       <SafeAreaView>
-        {/* <FlatList
-          data={ListSelect}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          extraData={selectedId}
-        /> */}
           <TouchableOpacity onPress={()=>{navigation.navigate("User")}} 
             style={{ backgroundColor:'#E2E2E2',height:50,padding:10,marginHorizontal:10,marginTop:5}} >
           <View style={{flexDirection: "row",alignItems: "center"}}>
@@ -115,6 +79,7 @@ const AccountDetail = ({navigation}) => {
             <Text style={{fontSize:24}}> Dashboard</Text>
           </View> 
         </TouchableOpacity>
+
         <TouchableOpacity onPress={()=>{navigation.navigate("OrderScreen")}} 
             style={{ backgroundColor:'#E2E2E2',height:50,padding:10,marginHorizontal:10,marginTop:5}} >
           <View style={{flexDirection: "row",alignItems: "center"}}>
@@ -122,6 +87,7 @@ const AccountDetail = ({navigation}) => {
             <Text style={{fontSize:24}}> Order</Text>
           </View> 
         </TouchableOpacity>
+
         <TouchableOpacity onPress={()=>{navigation.navigate("AccountDetail")}} 
             style={{ backgroundColor:COLORS.grey,height:50,padding:10,marginHorizontal:10,marginTop:5}} >
           <View style={{flexDirection: "row",alignItems: "center"}}>
@@ -129,6 +95,7 @@ const AccountDetail = ({navigation}) => {
             <Text style={{fontSize:24}}> Account Detail</Text>
           </View> 
         </TouchableOpacity>
+
         <TouchableOpacity onPress={()=>{navigation.navigate("ChangePassword")}} 
             style={{ backgroundColor:'#E2E2E2',height:50,padding:10,marginHorizontal:10,marginTop:5}} >
           <View style={{flexDirection: "row",alignItems: "center"}}>
@@ -136,6 +103,7 @@ const AccountDetail = ({navigation}) => {
             <Text style={{fontSize:24}}> Change Password</Text>
           </View> 
         </TouchableOpacity>
+
         <TouchableOpacity onPress={()=>onLogOut()} 
             style={{ backgroundColor:'#E2E2E2',height:50,padding:10,marginHorizontal:10,marginTop:5}} >
           <View style={{flexDirection: "row",alignItems: "center"}}>
@@ -143,6 +111,7 @@ const AccountDetail = ({navigation}) => {
             <Text style={{fontSize:24}}> Log Out</Text>
           </View> 
         </TouchableOpacity>
+
         <Text
           style={{
             fontSize: 28,
@@ -152,37 +121,41 @@ const AccountDetail = ({navigation}) => {
           }}
         >
           Account Detail
+        {/* name email password */}
         </Text>
-        <Text style={styles.text}>
+        {/* <Text style={styles.text}>
           First Name
         </Text>
         <TextInput style={styles.textInput}/>
         <Text style={styles.text}>
           Last Name
         </Text>
-        <TextInput style={styles.textInput}/>
+        <TextInput style={styles.textInput}/> */}
+
         <Text style={styles.text}>
-          Display Name
+          User Name
         </Text>
         <TextInput style={styles.textInput}/>
-        <Text style={styles.text}>
+
+        {/* <Text style={styles.text}>
           Phone/Number
         </Text>
-        <TextInput style={styles.textInput}/>
+        <TextInput style={styles.textInput}/> */}
+
         <Text style={styles.text}>
           Email
         </Text>
         <TextInput style={styles.textInput}/>
-        <Text style={styles.text}>
+        {/* <Text style={styles.text}>
           Gender
-        </Text>
-        <View style={styles.radiocontainer}>
+        </Text> */}
+        {/* <View style={styles.radiocontainer}>
           <RadioGroup
             radioButtons={radioButtons}
             onPress={onPressRadioButton}
             layout="row"
           />
-        </View>
+        </View> */}
         <View style={{paddingHorizontal:10}}>
         <CustomButton
         text="Save"

@@ -23,7 +23,7 @@ export const signupReducer = (state = initialState, action = {}) => {
       };
     }
     case SIGNUP_USER_SUCCESS: {
-      //console.log(action.payload.products)
+      console.log(action.payload.message)
       return {
         ...state,
         loading: false,
