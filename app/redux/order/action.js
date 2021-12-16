@@ -4,9 +4,10 @@ import {
   FETCH_ORDERS_FAILED,
 } from "./actionType";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-export const fetchOrdersList = () => {
-  const tokenVN = useSelector((state) => state.loginReducer.tokenVN);
+//import { useDispatch, useSelector } from "react-redux";
+//import { AsyncStorage } from '@react-native-community/async-storage';
+
+export const fetchOrdersList = (tokenVN) => {
   return async (dispatch) => {
     dispatch(fetchOrders())
     try {
@@ -14,9 +15,8 @@ export const fetchOrdersList = () => {
       
       { headers: {"Authorization" : `Bearer ${tokenVN}`} }).then(response => {
         //console.log(response);
-        const orders = response;
-        
-       console.log("danh sach ben order", orders);
+        const orders = response.data.data.order;
+       //console.log("danh sach ben order", orders);
 
         dispatch(fetchOrdersSuccess(orders));
       }).catch(err => {

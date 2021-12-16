@@ -4,10 +4,18 @@ import {
   LOGIN_USER_FAILED,
   LOGOUT_USER
 } from "./actionType";
-//import { AsyncStorage } from 'react-native';
+// import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios";
-// import { AsyncStorage } from '@react-native-async-storage/async-storage';
-
+// import { AsyncStorage } from '@react-native-community/async-storage';
+const storeData = async (value) => {
+  try {
+    await AsyncStorage.setItem('@storage_Key', value)
+    //console.log("value token ne ",value);
+  } catch (e) {
+    // saving error
+  }
+}
 
 export const postCheckLogin = (username, password) => {
   return async (dispatch) => {
@@ -20,13 +28,11 @@ export const postCheckLogin = (username, password) => {
           "password":password
         })
         .then((response) => {
-          console.log("mail", response.data.data.user.email);
-          console.log("token",response.data.token) 
-          console.log("name",response.data.data.user.name);
+       
           const email = response.data.data.user.email;
           const tokenVN = response.data.token;
           const name = response.data.data.user.name;
-          //console.log('tokenVN',tokenVN)
+          storeData(tokenVN);
           dispatch(loginUserSuccess(email, tokenVN, name));
         })
         .catch((err) => {

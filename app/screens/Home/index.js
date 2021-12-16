@@ -61,9 +61,7 @@ const Home = ({ navigation }) => {
             <View
               style={{
                 backgroundColor:
-                  selectedCategoryIndex == index
-                    ? COLORS.grey
-                    : COLORS.grey_light,
+                  selectedCategoryIndex == index? COLORS.green : COLORS.green_dark,
                 ...styles.categoryBtn,
               }}
             >
@@ -113,7 +111,7 @@ const Home = ({ navigation }) => {
             <View
               style={{
                 backgroundColor:
-                  selectedBrandIndex == index ? COLORS.grey : COLORS.grey_light,
+                  selectedBrandIndex == index ? COLORS.green : COLORS.green_dark,
                 ...styles.brandBtn,
               }}
             >
@@ -257,6 +255,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginLeft: 10,
     marginRight: 10,
+    
   },
   Logo: {
     paddingTop: 10,

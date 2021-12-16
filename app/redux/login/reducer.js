@@ -3,7 +3,7 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILED,LOGOUT_USER
 } from "./actionType";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const initialState = {
   error: null,
   name: '',
@@ -25,7 +25,7 @@ export const loginReducer = (state = initialState, action = {}) => {
       };
     }
     case LOGIN_USER_SUCCESS: {
-      console.log("name",action.payload.name);
+      // console.log("tokenVN",action.payload.tokenVN);
       return {
         ...state,
         loading: false,

@@ -34,29 +34,31 @@ const Order = ({ navigation }) => {
 
 
   const getListOrders = () => {
-    dispatch(fetchOrdersList());
+    dispatch(fetchOrdersList(tokenVN));
   };
+  const tokenVN = useSelector((state) => state.loginReducer.tokenVN); 
+   
   const ordersList = useSelector((state) => state.orderReducer.orders);
-  console.log("danh sách order ",ordersList);
+   console.log("danh sách order ",ordersList);// chưa chạy 
   const Card = ({ order }) => {
     return (
       <View style={styles.card}>
         <Text style={{ fontSize: 20, fontWeight: "normal", paddingTop: 10 }}>
-          ID: {order.id}
+          ID: {order._id}
         </Text>
         <Text style={{ fontSize: 20, fontWeight: "normal", paddingTop: 10 }}>
-          DATE: {order.date}
+          CREATE AT: {order.createdAt}
         </Text>
         <Text style={{ fontSize: 20, fontWeight: "normal", paddingTop: 10 }}>
-          STATUS: {order.status}
+          PAYMENT METHOD: {order.paymentMethod}
         </Text>
         <Text style={{ fontSize: 20, fontWeight: "normal", paddingTop: 10 }}>
-          TOTAL: {order.total}
+          TOTAL: ${order.totalPrice}
         </Text>
 
         <View
           style={{
-            marginTop: 10,
+            marginTop: 5,
             marginHorizontal: 20,
             flexDirection: "row",
             justifyContent: "center",
@@ -179,8 +181,10 @@ const Order = ({ navigation }) => {
         </Text>
         <FlatList
           showsVerticalScrollIndicator={false}
-          data={orderList}
-          renderItem={({ item }) => <Card order={item} />}
+          data={ordersList}
+          renderItem={({ item }) => <Card order={item} 
+          // keyExtractor={(item, index) => index.toString()}
+          />}
         />
       </SafeAreaView>
     </ScrollView>
@@ -242,7 +246,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     elevation: 13,
     justifyContent: "flex-start",
-    backgroundColor: COLORS.grey_light,
+    backgroundColor: COLORS.green_dark,
   },
 });
 export default Order;

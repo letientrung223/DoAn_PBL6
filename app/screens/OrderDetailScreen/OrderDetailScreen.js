@@ -6,41 +6,55 @@ import COLORS from "../../consts/colors";
 
 import {SecondaryButton} from '../../components/Button';
 
-const DetailScreen = ({navigation, route}) => {
-  const onAddToCard = () => {
-    console.warn("Add To Card");
-  };
+const OrderDetailScreen = ({navigation, route}) => {
+  
   const item = route.params;
-  // console.log(item.images);
-  const ListIMG = () => {
+  const Card = ({ cloth }) => {
     return (
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={style.categoriesListContainer}
+      <TouchableHighlight
+        underlayColor={COLORS.white}
+        activeOpacity={0.9}
+        onPress={() => navigation.navigate("DetailScreen", cloth)}
       >
-        {(item.images).map((img, index) => (
-              <View style={style.brandBtnImgCon}>
-                <Image
-                  source={{uri:img}}
-                  style={{
-                    height: 250,
-                    width: 250,
-                    resizeMode: "cover",
-                    
-
-                  }}
-                />
-              </View>
-            
-        ))}
-      </ScrollView>
+        <View style={styles.card}>
+          <View style={{ alignItems: "center", top: 2 }}>
+            <Image source={{uri: cloth.imageCover}} style={{ height: 120, width: 130 }} />
+          </View>
+          <View style={{ marginHorizontal: 20 }}>
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: "bold",
+                paddingTop: 10,
+                
+              }}  numberOfLines={1}
+            >
+              {cloth.name}
+            </Text>
+            <Text style={{ fontSize: 14, color: COLORS.grey, marginTop: 2 }}>
+              {cloth.brand}
+            </Text>
+          </View>
+          <View
+            style={{
+              marginTop: 10,
+              marginHorizontal: 20,
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+              ${cloth.price}
+            </Text>
+          </View>
+        </View>
+      </TouchableHighlight>
     );
   };
   return (
     <SafeAreaView style={{backgroundColor: COLORS.white, marginTop:30}}>
       <View style={style.header}>
-        <MaterialIcons name="arrow-back-ios" size={28} onPress={() => navigation.navigate('Home')} />
+        <MaterialIcons name="arrow-back-ios" size={28} onPress={() => navigation.navigate('OrderScreen')} />
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Details</Text>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -126,4 +140,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default DetailScreen;
+export default OrderDetailScreen;

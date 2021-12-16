@@ -14,7 +14,8 @@ import SignUpScreen from "../screens/SignUpScreen";
 import AccountDetail from "../screens/AccountDetail";
 import ChangePassword from "../screens/ChangePassword";
 import OrderScreen from "../screens/OrderScreen";
-import DetailScreen from "../screens/DetailScreen";
+
+import OrderDetailScreen from "../screens/OrderDetailScreen";
 import { useDispatch, useSelector } from "react-redux";
 
 const Tab = createBottomTabNavigator();
@@ -54,7 +55,7 @@ function Profile() {
 
 function Router() {
   const tokenVN = useSelector((state) => state.loginReducer.tokenVN);
-  // console.log("token:  ",tokenVN);
+  console.log(tokenVN);
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -106,7 +107,7 @@ function Router() {
       />
       <Tab.Screen
         name="Profile"
-        component={(tokenVN=="")?SignInScreen:Profile}
+        component={(tokenVN=="")?SignInSignUp:Profile}
         options={{
           tabBarIcon: ({ size, color }) => (
             <FontAwesome name="user" size={size} color={color} />
