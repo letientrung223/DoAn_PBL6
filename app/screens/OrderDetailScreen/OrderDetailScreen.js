@@ -1,24 +1,36 @@
-import React from 'react';
-import {SafeAreaView, StyleSheet, View, Text, Image} from 'react-native';
-import {ScrollView,FlatList} from 'react-native-gesture-handler';
-import { MaterialIcons } from '@expo/vector-icons';
+import React from "react";
+import {
+  SafeAreaView,
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  TouchableHighlight,
+  Dimensions,
+} from "react-native";
+import { ScrollView, FlatList } from "react-native-gesture-handler";
+import { MaterialIcons } from "@expo/vector-icons";
 import COLORS from "../../consts/colors";
+const { width } = Dimensions.get("screen");
 
-import {SecondaryButton} from '../../components/Button';
+// import { SecondaryButton } from "../../components/Button";
+const cardWidth = width / 2 - 20;
 
-const OrderDetailScreen = ({navigation, route}) => {
-  
-  const item = route.params;
+const OrderDetailScreen = ({ navigation, route }) => {
+  const list_product = route.params;
   const Card = ({ cloth }) => {
     return (
       <TouchableHighlight
         underlayColor={COLORS.white}
         activeOpacity={0.9}
-        onPress={() => navigation.navigate("DetailScreen", cloth)}
+        onPress={()=>{}}
       >
         <View style={styles.card}>
           <View style={{ alignItems: "center", top: 2 }}>
-            <Image source={{uri: cloth.imageCover}} style={{ height: 120, width: 130 }} />
+            <Image
+              source={{ uri: cloth.image }}
+              style={{ height: 120, width: 130 }}
+            />
           </View>
           <View style={{ marginHorizontal: 20 }}>
             <Text
@@ -26,13 +38,16 @@ const OrderDetailScreen = ({navigation, route}) => {
                 fontSize: 18,
                 fontWeight: "bold",
                 paddingTop: 10,
-                
-              }}  numberOfLines={1}
+              }}
+              numberOfLines={1}
             >
               {cloth.name}
             </Text>
             <Text style={{ fontSize: 14, color: COLORS.grey, marginTop: 2 }}>
-              {cloth.brand}
+             Quantity: {cloth.qty}
+            </Text>
+            <Text style={{ fontSize: 14, color: COLORS.grey, marginTop: 2 }}>
+             Size: {cloth.size}
             </Text>
           </View>
           <View
@@ -44,7 +59,7 @@ const OrderDetailScreen = ({navigation, route}) => {
             }}
           >
             <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-              ${cloth.price}
+             Price: ${cloth.price}
             </Text>
           </View>
         </View>
@@ -52,55 +67,46 @@ const OrderDetailScreen = ({navigation, route}) => {
     );
   };
   return (
-    <SafeAreaView style={{backgroundColor: COLORS.white, marginTop:30}}>
-      <View style={style.header}>
-        <MaterialIcons name="arrow-back-ios" size={28} onPress={() => navigation.navigate('OrderScreen')} />
-        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Details</Text>
+    <SafeAreaView style={{ backgroundColor: COLORS.white, marginTop: 30 }}>
+      <View style={styles.header}>
+        <MaterialIcons
+          name="arrow-back-ios"
+          size={28}
+          onPress={() => navigation.navigate("OrderScreen")}
+        />
+        <Text style={{ fontSize: 20, fontWeight: "bold" }}>Details</Text>
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: 280,
-          }}>
-          <ListIMG/>
-
-        </View>
-        <View style={style.details}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
-            <Text
-              style={{fontSize: 25, fontWeight: 'bold', color: COLORS.white}}>
-              {item.name}
-            </Text>
-            {/* <View style={style.iconContainer}>
-              <MaterialIcons name="favorite-border" color={COLORS.primary} size={25} />
-            </View> */}
-          </View>
-          <Text style={style.detailsText}>
-            {item.description}
-          </Text>
-          <View style={{marginTop: 40, marginBottom: 40}}>
-            <SecondaryButton title="Add To Cart" onPress={onAddToCard}/>
-          </View>
-        </View>
-      </ScrollView>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        data={list_product}
+        renderItem={({ item }) => (
+          <Card
+            cloth={item}
+            // keyExtractor={(item, index) => index.toString()}
+          />
+        )}
+      />
     </SafeAreaView>
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   header: {
     marginTop: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginHorizontal: 20,
     paddingBottom: 10,
+  },
+  card: {
+    height: 250,
+    width: 340,
+    marginHorizontal: 10,
+    marginBottom: 5,
+    marginTop: 20,
+    borderRadius: 15,
+    elevation: 13,
+    backgroundColor: COLORS.white,
   },
   details: {
     paddingHorizontal: 20,
@@ -115,8 +121,8 @@ const style = StyleSheet.create({
     backgroundColor: COLORS.white,
     height: 50,
     width: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 30,
   },
   detailsText: {

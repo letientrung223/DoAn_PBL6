@@ -49,6 +49,8 @@ function Profile() {
         <Stack.Screen name="OrderScreen" component={OrderScreen} />
         <Stack.Screen name="AccountDetail" component={AccountDetail} />
         <Stack.Screen name="ChangePassword" component={ChangePassword} />
+        <Stack.Screen name="OrderDetailScreen" component={OrderDetailScreen} />
+        
       </Stack.Navigator>
     );
   }

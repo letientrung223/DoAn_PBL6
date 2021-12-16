@@ -7,10 +7,10 @@ import {
   FlatList,
   SafeAreaView,
   Dimensions,
-  TouchableOpacity,
+  
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView,TouchableOpacity } from "react-native-gesture-handler";
 import asset from "../../../assets/images/index";
 import COLORS from "../../consts/colors";
 import orderList from "./../../consts/orderlist";
@@ -65,7 +65,8 @@ const Order = ({ navigation }) => {
           }}
         >
           {/* navigate đến trang order detail */}
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity 
+              onPress={() => navigation.navigate("OrderDetailScreen", order.orderItems)}>
             <Text> View Detail</Text>
           </TouchableOpacity>
         </View>
