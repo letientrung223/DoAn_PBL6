@@ -7,6 +7,8 @@ import {
   CardStyleInterpolators,
 } from "@react-navigation/stack";
 import DetailScreen from "../screens/DetailScreen";
+import Cart from "../screens/Cart";
+import SignInScreen from "../screens/SignInScreen";
 import Menu from "../screens/Menu";
 import { Easing } from "react-native";
 const Stack = createStackNavigator();
@@ -52,6 +54,8 @@ export default function HomeToDetail() {
       <Stack.Screen name="HomeScreen" component={Router} />
       <Stack.Screen name="DetailScreen" component={DetailScreen} />
       <Stack.Screen name="Menu" component={Menu} />
+      <Stack.Screen name="Cart" component={Cart} />
+      <Stack.Screen name="SignInScreen" component={SignInScreen} />
     </Stack.Navigator>
   );
 }

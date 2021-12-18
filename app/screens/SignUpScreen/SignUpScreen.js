@@ -21,7 +21,7 @@ const dispatch =useDispatch();
   const onSignUpPressed = (username,email, password,repassword) => {
 
     dispatch(postCheckSignUp(username,email, password,repassword));
-    console.log("onSignUpPressed with ",username,email,password,repassword); 
+    // console.log("onSignUpPressed with ",username,email,password,repassword); 
   };
 
 

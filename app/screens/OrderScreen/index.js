@@ -13,7 +13,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { ScrollView,TouchableOpacity } from "react-native-gesture-handler";
 import asset from "../../../assets/images/index";
 import COLORS from "../../consts/colors";
-import orderList from "./../../consts/orderlist";
 import {postCheckLogout,} from "../../redux/login/action";
 import { useDispatch, useSelector } from "react-redux";
 const { width } = Dimensions.get("screen");
@@ -39,7 +38,6 @@ const Order = ({ navigation }) => {
   const tokenVN = useSelector((state) => state.loginReducer.tokenVN); 
    
   const ordersList = useSelector((state) => state.orderReducer.orders);
-   console.log("danh sách order ",ordersList);// chưa chạy 
   const Card = ({ order }) => {
     return (
       <View style={styles.card}>

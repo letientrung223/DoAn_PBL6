@@ -4,7 +4,7 @@ import { View, Text,TextInput,StyleSheet } from 'react-native';
 
 const CustomInput = ({value,setValue,placeholder,secureTextEntry}) => {
     return (
-        <View style={styles.contrainer}>
+        <View style={styles.container}>
             <TextInput 
             value ={value}
             onChangeText = {setValue}
@@ -17,7 +17,7 @@ const CustomInput = ({value,setValue,placeholder,secureTextEntry}) => {
     )
 }
 const styles = StyleSheet.create({
-    contrainer:{
+    container:{
         backgroundColor:'white',
         width:'100%',
         borderColor:'#e8e8e8',

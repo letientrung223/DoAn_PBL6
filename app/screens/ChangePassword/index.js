@@ -18,49 +18,21 @@ import CustomButton from "../../components/CustomButton";
 import COLORS from "../../consts/colors";
 import {postCheckLogout,} from "../../redux/login/action";
 import { useDispatch, useSelector } from "react-redux";
-
-// const ListSelect = [
-//   { id: "Dashboard",      title: " Dashboard",       icons: "home-outline" },
-//   { id: "Order",          title: " Order",           icons: "cart-outline" },
-//   { id: "Account Detail", title: " Account Detail",  icons: "person-outline" },
-//   { id: "Change Password",title: "Change Password",  icons: "key-outline" },
-//   { id: "Log out",        title: " Log out",         icons: "log-out-outline" },
-// ];
-
-// const Item = ({ item, onPress, backgroundColor, textColor }) => (
-//   <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-//     <View>
-//       <Ionicons name={item.icons} size={26} color="black" />
-//     </View>
-//     <View>
-//       <Text style={[styles.text, textColor]}> {item.title}</Text>
-//     </View>
-//   </TouchableOpacity>
-// );
+import { Alert } from "react-native";
+import {updatePasswordUser} from "../../redux/changepassword/action"
 const ChangePassword = ({navigation}) => {
   const dispatch =useDispatch();
   const onLogOut = () => {
     dispatch(postCheckLogout());
     
   };  
-  const onSavePressed = () => {
-    console.warn("Saved");
+  const onSavePressed = (oldPass, newPass,renewPass,tokenVN) => {
+    dispatch(updatePasswordUser(oldPass, newPass,renewPass,tokenVN));
   };
-  // const [selectedId, setSelectedId] = useState(null);
-  // const renderItem = ({ item }) => {
-  //   const backgroundColor = item.id === selectedId ? "#9C9999" : "#E2E2E2";
-  //   const color = item.id === selectedId ? "white" : "black";
-
-  //   return (
-  //     <Item
-  //       item={item}
-  //       onPress={() => setSelectedId(item.id)}
-  //       backgroundColor={{ backgroundColor }}
-  //       textColor={{ color }}
-  //     />
-  //   );
-  // };
-
+  const [oldPass, setOldPass] = useState("");
+  const [newPass, setNewPass] = useState("");
+  const [rePass, setRePass] = useState("");
+  const tokenVN = useSelector((state) => state.loginReducer.tokenVN); 
 
   return (
    
@@ -80,12 +52,6 @@ const ChangePassword = ({navigation}) => {
         />
       </View>
       <SafeAreaView>
-        {/* <FlatList
-          data={ListSelect}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          extraData={selectedId}
-        /> */}
           <TouchableOpacity onPress={()=>{navigation.navigate("User")}} 
             style={{ backgroundColor:'#E2E2E2',height:50,padding:10,marginHorizontal:10,marginTop:5}} >
           <View style={{flexDirection: "row",alignItems: "center"}}>
@@ -134,22 +100,32 @@ const ChangePassword = ({navigation}) => {
         <Text style={styles.text}>
           Old Password
         </Text>
-        <TextInput secureTextEntry={true} style={styles.textInput}/>
+        <TextInput 
+          value ={oldPass}
+          onChangeText = {setOldPass} 
+          secureTextEntry={true} 
+          style={styles.textInput}/>
         <Text style={styles.text}>
           New Password
         </Text>
-        <TextInput secureTextEntry={true} style={styles.textInput}/>
+        <TextInput 
+        value ={newPass}
+        onChangeText = {setNewPass} 
+        secureTextEntry={true} style={styles.textInput}/>
         <Text style={styles.text}>
          Re-New Password
         </Text>
-        <TextInput secureTextEntry={true} style={styles.textInput}/>
+        <TextInput 
+        value ={rePass}
+        onChangeText = {setRePass} 
+        secureTextEntry={true} style={styles.textInput}/>
         
         <View style={{paddingHorizontal:10}}>
         <CustomButton
         text="Save"
-        bgColor="#3D3D3D"
+        bgColor={COLORS.green}
         fgColor="#ffffff"
-        onPress={onSavePressed}              
+        onPress={()=>onSavePressed(oldPass, newPass,newPass,tokenVN)}              
         />
         </View>
 

@@ -3,7 +3,7 @@ import {
   SIGNUP_USER_SUCCESS,
   SIGNUP_USER_FAILED,
 } from "./actionType";
-
+import {Alert} from "react-native"
 const initialState = {
   error: null,
   loading: false,
@@ -23,7 +23,10 @@ export const signupReducer = (state = initialState, action = {}) => {
       };
     }
     case SIGNUP_USER_SUCCESS: {
-      console.log(action.payload.message)
+      Alert.alert(
+        "Success, please Login",
+      )
+      //console.log(action.payload.message)
       return {
         ...state,
         loading: false,
@@ -34,6 +37,9 @@ export const signupReducer = (state = initialState, action = {}) => {
       };
     }
     case SIGNUP_USER_FAILED: {
+      Alert.alert(
+        "Please Sign Up Again",
+      )
       return {
         ...state,
         loading: false,

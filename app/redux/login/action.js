@@ -28,7 +28,7 @@ export const postCheckLogin = (username, password) => {
           "password":password
         })
         .then((response) => {
-          console.log(response.status);
+          //console.log(response);
           const email = response.data.data.user.email;
           const tokenVN = response.data.token;
           const name = response.data.data.user.name;

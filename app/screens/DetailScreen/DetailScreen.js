@@ -72,8 +72,9 @@ const DetailScreen = ({ navigation, route }) => {
         contentContainerStyle={style.categoriesListContainer}
       >
         {item.images.map((img, index) => (
-          <View style={style.brandBtnImgCon}>
+          <View key={index} style={style.brandBtnImgCon}>
             <Image
+             
               source={{ uri: img }}
               style={{
                 height: 250,

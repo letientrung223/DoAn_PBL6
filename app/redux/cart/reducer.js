@@ -2,6 +2,7 @@ import {
   FETCH_USER_CART,
   FETCH_USER_CART_SUCCESS,
   FETCH_USER_CART_FAILED,
+  DELETE_ITEM_FROM_CART
 } from "./actionType";
 
 const initialState = {
@@ -38,6 +39,13 @@ export const cartReducer = (state = initialState, action = {}) => {
         cart: [],
         error: action.payload.error,
       };
+    }
+    case DELETE_ITEM_FROM_CART:{
+      return {
+        ...state,
+        loading: false,
+        error:null,
+      }
     }
     default:
       return state;

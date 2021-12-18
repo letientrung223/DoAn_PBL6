@@ -5,13 +5,21 @@ import {loginReducer} from "./login/reducer"
 import {signupReducer} from "./signup/reducer"
 import {orderReducer} from "./order/reducer"
 import {cartReducer} from "./cart/reducer"
-
+import {forgotPWReducer} from "./forgotpassword/reducer"
+import {resetPWReducer} from "./resetpassword/reducer"
+import {getAccountReducer,updateAccountReducer} from "./accountdetail/reducer"
+import {updatePasswordReducer} from "./changepassword/reducer"
 const rootReducer = combineReducers({ 
   homeReducer,
   loginReducer,
   signupReducer,
   orderReducer,
   cartReducer,
+  forgotPWReducer,
+  resetPWReducer,
+  getAccountReducer,
+  updateAccountReducer,
+  updatePasswordReducer,
  });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose;

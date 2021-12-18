@@ -33,9 +33,7 @@ const dispatch =useDispatch();
   const onSignInWithFBPressed = () => {
     console.warn("currently not supported");
   };
-  const onForgotPassWordPressed = () => {
-    console.warn("Forgot Password");
-  };
+  
   return (
     <View style={styles.root}>
       <Image
@@ -62,7 +60,7 @@ const dispatch =useDispatch();
       
       <CustomButton
         text="Forgot Password?"
-        onPress={onForgotPassWordPressed}
+        onPress={()=>navigation.navigate("ForgotPassword")}
         type="TERTIARY"
       />
 
