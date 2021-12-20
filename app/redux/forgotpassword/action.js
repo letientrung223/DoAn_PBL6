@@ -16,9 +16,6 @@ export const posFGPW = (email) => {
         })
         .then((response) => {
           console.log(response);
-          // const email = response.data.data.user.email;
-          // const tokenVN = response.data.token;
-          // const name = response.data.data.user.name;
           dispatch(postForgotPasswordSuccess(email));
         })
         .catch((err) => {

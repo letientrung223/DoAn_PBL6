@@ -6,12 +6,12 @@ import {
   Image,
   SafeAreaView,
   TouchableOpacity,
-  TextInput,
-  CheckBox,
+  
 } from "react-native";
+
 import { FlatList } from "react-native-gesture-handler";
 import { FontAwesome } from "@expo/vector-icons";
-import { fetchUserCart, deleteItem } from "../../redux/cart/action";
+import { fetchUserCart, deleteItem,increaseQuantityUserCart, decreaseQuantityUserCart} from "../../redux/cart/action";
 import COLORS from "../../consts/colors";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -19,8 +19,14 @@ import { PrimaryButton } from "../../../app/components/Button";
 
 const Cart = ({ navigation }) => {
   const tokenVN = useSelector((state) => state.loginReducer.tokenVN);
-
-  const [count, setCount] = useState(1);
+  const userCart = useSelector((state) => state.cartReducer.cart);
+  function getIdCartItem(inputs) {
+    
+    var output = inputs.map(function(item){
+        return item._id})
+    return output
+}
+  const ID_cartItem = getIdCartItem(userCart);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,26 +37,26 @@ const Cart = ({ navigation }) => {
     dispatch(fetchUserCart(tokenVN));
   };
 
-  const increase = () => {
-    setCount((count) => count + 1);
-    // dispatch tang sl
+  const increase =async (id_product,size,quantity) => {
+
+    dispatch(increaseQuantityUserCart(id_product,size,quantity,tokenVN))
+  };
+  const decrease =async (id_product,size,quantity) => {
+    dispatch(decreaseQuantityUserCart(id_product,size,quantity,tokenVN))
   };
 
-  const decrease = () => {
-    setCount((count) => count - 1);
+  const onRemove = async (id) => {
+  
+     dispatch(deleteItem(id,tokenVN));
+   
   };
-  const userCart = useSelector((state) => state.cartReducer.cart);
-  const onRemove = (id) => {
-    dispatch(deleteItem(id));
-  };
-
   const CartCard = ({ item }) => {
     return (
       <View style={styles.cartCard}>
         {/* ================================================================ */}
         <View>
           <TouchableOpacity
-            onPress={() => onRemove(item._id)}
+            onPress={() => {onRemove(item._id)}}
             style={{ paddingTop: 60, paddingRight: 10 }}
           >
             <FontAwesome name="trash-o" size={24} color="black" />
@@ -64,69 +70,39 @@ const Cart = ({ navigation }) => {
           />
           <View style={styles.actionBtn}>
             {/* Decrease */}
-            <TouchableOpacity disabled={count <= 1} onPress={decrease}>
+            <TouchableOpacity 
+            disabled={item.userQuantity <= 1} 
+            onPress={()=> decrease(item._id,item.userSize,item.userQuantity)}>
               <FontAwesome name="minus" size={20} color={COLORS.dark} />
             </TouchableOpacity>
             {/* Quantity */}
-            <TextInput style={{ fontSize: 16 }} placeholder="">
+            <Text style={{ fontSize: 16 }} placeholder="">
               {item.userQuantity}{" "}
-            </TextInput>
+            </Text>
             {/* Increase */}
-            <TouchableOpacity onPress={increase}>
+            <TouchableOpacity 
+            onPress={()=> increase(item._id,item.userSize,item.userQuantity)}>
               <FontAwesome name="plus" size={20} color={COLORS.dark} />
             </TouchableOpacity>
           </View>
         </View>
         {/* ================================================================ */}
 
-        <View
-          style={{ height: 100, marginLeft: 10, paddingVertical: 20, flex: 1 }}
-        >
-          <Text
-            style={{ fontSize: 16, fontWeight: "bold", marginTop: -10 }}
-            numberOfLines={1}
-          >
-            {item.product.name}
-          </Text>
+        <View style={{ height: 100, marginLeft: 10, paddingVertical: 20, flex: 1 }}>
+          <Text style={{ fontSize: 16, fontWeight: "bold", marginTop: -10 }}numberOfLines={1}>{item.product.name}</Text>
 
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: "bold",
-              color: "red",
-              paddingTop: 10,
-            }}
-          >
-            Price: ${item.product.price}
-          </Text>
-          {/* </View>  */}
-          {/* <View style={{ marginRight: 20, alignItems: "center" }}> */}
-          <Text
-            style={{
-              fontWeight: "bold",
-              fontSize: 18,
-              paddingTop: 10,
-              paddingBottom: 10,
-            }}
-          >
-            Quantity:{item.userQuantity}
-          </Text>
-          <Text
-            style={{
-              textTransform: "uppercase",
-              fontWeight: "bold",
-              fontSize: 18,
-              // paddingTop: 10,
-              // paddingBottom: 10,
-            }}
-          >
-            Size:{item.userSize}
-          </Text>
+          <Text style={{fontSize: 16,fontWeight: "bold",color: "red",paddingTop: 10,}}>Price: ${item.product.price}</Text>
+          
+          <Text style={{fontWeight: "bold",fontSize: 16,paddingTop: 10, paddingBottom: 10,}}>Quantity:{item.userQuantity}</Text>
+          
+          <Text style={{ textTransform: "uppercase",fontWeight: "bold",fontSize: 18,}}>Size:{item.userSize}</Text>
+
         </View>
         {/* ================================================================ */}
       </View>
     );
   };
+
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1 }}>
       <View style={styles.header}>
@@ -148,7 +124,7 @@ const Cart = ({ navigation }) => {
         ListFooterComponent={() => (
           <View>
             <View style={{ marginHorizontal: 30 }}>
-              <PrimaryButton title="CREATE ORDER" />
+              <PrimaryButton title="Check Out" onPress={() => navigation.navigate("CheckOut",ID_cartItem)}/>
             </View>
           </View>
         )}

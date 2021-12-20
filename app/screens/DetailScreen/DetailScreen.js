@@ -1,69 +1,51 @@
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, View, Text, Image, TouchableOpacity,  TextInput, } from "react-native";
+import {
+  SafeAreaView,
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 import { ScrollView, FlatList } from "react-native-gesture-handler";
 import { MaterialIcons } from "@expo/vector-icons";
 import COLORS from "../../consts/colors";
-import RadioGroup from "react-native-radio-buttons-group";
 import { FontAwesome } from "@expo/vector-icons";
-
 import { SecondaryButton } from "../../components/Button";
-const radioButtonsData = [
-  {
-    id: "1",
-    label: "S",
-    value: "s",
-    color:COLORS.white,
-    selected: true,
-  },
-  {
-    id: "2",
-    label: "M",
-    value: "m",
-    color: COLORS.white,
-    selected: false,
-  },
-  {
-    id: "3",
-    label: "L",
-    value: "l",
-    color: COLORS.white,
-    selected: false,
-  },
-  {
-    id: "4",
-    label: "XL",
-    value: "xl",
-    color:COLORS.white,
-    selected: false,
-  },
-];
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import {AddItemToCart} from "../../redux/product/action"
+import { useDispatch, useSelector } from "react-redux";
 
-// const [radioButtons, setRadioButtons] = useState(radioButtonsData);
-// const onPressRadioButton = (radioButtonsArray) => {
-//   console.log(radioButtonsArray);
-//   setRadioButtons(radioButtonsArray);
-// };
+var radio_props = [
+  {label: 'S   ', value: 's' },
+  {label: 'M   ', value: 'm' },
+  {label: 'L   ', value: 'l' },
+  {label: 'XL  ', value: 'xl' },
+
+];
 
 const DetailScreen = ({ navigation, route }) => {
   const [count, setCount] = useState(1);
+  const [value, setValues] = useState("");
+  const dispatch =useDispatch();
 
-    const increase = () => {
-    setCount(count => count + 1);
+  const increase = () => {
+    setCount((count) => count + 1);
   };
 
   const decrease = () => {
-    setCount(count => count - 1);
+    setCount((count) => count - 1);
   };
-  const [radioButtons, setRadioButtons] = useState(radioButtonsData);
-  const onPressRadioButton = (radioButtonsArray) => {
-    console.log(radioButtonsArray);
-    setRadioButtons(radioButtonsArray);
+
+ 
+  const onAddToCard = (id_product,size,qty,tokenVN) => {
+    // console.warn("Add To Card with info: Name ",id_product," + Quantity: ",qty," Size: ",size );
+    dispatch(AddItemToCart(id_product,qty,size,tokenVN))
   };
-  const onAddToCard = () => {
-    console.warn("Add To Card");
-  };
+  const tokenVN = useSelector((state) => state.loginReducer.tokenVN); 
+  // console.log("tokenVN: ",tokenVN);
   const item = route.params;
-  // console.log(item.images);
   const ListIMG = () => {
     return (
       <ScrollView
@@ -74,7 +56,6 @@ const DetailScreen = ({ navigation, route }) => {
         {item.images.map((img, index) => (
           <View key={index} style={style.brandBtnImgCon}>
             <Image
-             
               source={{ uri: img }}
               style={{
                 height: 250,
@@ -120,40 +101,37 @@ const DetailScreen = ({ navigation, route }) => {
             >
               {item.name}
             </Text>
-            {/* <View style={style.iconContainer}>
-              <MaterialIcons name="favorite-border" color={COLORS.primary} size={25} />
-            </View> */}
           </View>
           <Text style={style.detailsText}>{item.description}</Text>
+          {/* ============================================================ */}
           <View style={style.radiocontainer}>
-            <RadioGroup
-              radioButtons={radioButtons}
-              onPress={onPressRadioButton}
-              layout="row"
-            />
+            <RadioForm
+              radio_props={radio_props}
+              initial={value}
+              buttonColor={'#FFFFFF'}
+              labelColor={'#FFFFFF'}
+              formHorizontal={true}
+              style={{paddingLeft:10,paddingRight:20,marginLeft:10,marginRight:10}}
+              onPress={(vl) => {setValues(vl)}}
+        />
           </View>
+          {/* ============================================================ */}
+
           <View style={style.actionBtn}>
-            {/* Nút giảm */}
-            <TouchableOpacity
-             
-             disabled={count <= 1}
-             onPress={decrease}
-            >
+
+            <TouchableOpacity disabled={count <= 1} onPress={decrease}>
               <FontAwesome name="minus" size={25} color={COLORS.white} />
             </TouchableOpacity>
-            {/* Số lượng */}
-            <TextInput style={{ fontSize:20,color: COLORS.white}} >{count}</TextInput>
-            {/* Nút tăng */}
-            <TouchableOpacity
-               // increaseCount;
-               onPress={increase}
-              
-            >
+
+            <Text style={{ fontSize: 20,color: COLORS.white }}>{count}</Text>
+            
+            <TouchableOpacity onPress={increase}>
               <FontAwesome name="plus" size={25} color={COLORS.white} />
             </TouchableOpacity>
+
           </View>
           <View style={{ marginTop: 40, marginBottom: 40 }}>
-            <SecondaryButton title="Add To Cart" onPress={onAddToCard} />
+            <SecondaryButton title="Add To Cart" onPress={()=>onAddToCard(item._id,value,count,tokenVN)} />
           </View>
         </View>
       </ScrollView>
@@ -206,7 +184,7 @@ const style = StyleSheet.create({
   },
   radiocontainer: {
     flex: 1,
-    marginTop:10,
+    marginTop: 10,
     justifyContent: "center",
     alignItems: "center",
     paddingBottom: 10,
@@ -226,7 +204,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginLeft: 100
+    marginLeft: 100,
   },
 });
 

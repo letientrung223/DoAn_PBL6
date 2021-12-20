@@ -2,7 +2,10 @@ import {
   FETCH_USER_CART,
   FETCH_USER_CART_SUCCESS,
   FETCH_USER_CART_FAILED,
-  DELETE_ITEM_FROM_CART
+  INCREASE_QUANTITY,
+  DECREASE_QUANTITY,
+  UPDATE_QUANTITY_FAILED, 
+
 } from "./actionType";
 import axios from "axios";
 
@@ -16,8 +19,6 @@ export const fetchUserCart = (tokenVN) => {
         console.log("ben action cart ",response);
         const cart = response.data.data.cart.cartItem;
         
-      // console.log("danh sach cart ben action", cart);
-
         dispatch(fetchCartSuccess(cart));
       }).catch(err => {
         dispatch(fetchCartFailed(err));
@@ -49,23 +50,95 @@ const fetchCartFailed = (error) => {
     },
   };
 };
-export const deleteItem = (id) =>{
+export const deleteItem = (id,tokenVN) =>{
   return async (dispatch) => {
     try {
-      // axios.delete(URL, payload, header);
+      const headers = {
+        'Authorization':  `Bearer ${tokenVN}`
+      }
+      const data = {
+        item: id
+      } 
       axios.delete("https://shop-pbl6.herokuapp.com/api/v1/cart/",
-      {"item":id},
-      { headers: {"Authorization" : `Bearer ${tokenVN}`} } ).then(response => {
-        console.log("ben action cart delete ",response);
-        dispatch(deleteItemFromCart());
+      {headers,data}
+      ).then(response => {
+        dispatch(fetchUserCart(tokenVN));
+        
       })
     } catch (error) {
       dispatch(fetchCartFailed(error));
     }
   };
 };
-const deleteItemFromCart = () => {
-  return {
-    type: DELETE_ITEM_FROM_CART,
+
+export const increaseQuantityUserCart = (id_product,size,quantity,tokenVN) => {
+  return async (dispatch) => {
+    try {
+      axios
+        .patch("https://shop-pbl6.herokuapp.com/api/v1/cart/", {
+          "id": id_product,
+          "size":size,
+          "quantity":quantity + 1
+          
+        },{ headers: {"Authorization" : `Bearer ${tokenVN}`} })
+        .then((response) => {
+         dispatch(fetchUserCart(tokenVN));
+
+        })
+        .catch((err) => {
+          console.log("loi", err);
+          dispatch(updateQtyFailed(err));
+        });
+    } catch (error) {
+      dispatch(updateSizeFailed(error));
+    }
   };
 };
+
+export const decreaseQuantityUserCart = (id_product,size,quantity,tokenVN) => {
+  return async (dispatch) => {
+    try {
+      axios
+        .patch("https://shop-pbl6.herokuapp.com/api/v1/cart/", {
+          "id": id_product,
+          "size":size,
+          "quantity":quantity - 1
+          
+        },{ headers: {"Authorization" : `Bearer ${tokenVN}`} })
+        .then((response) => {
+         dispatch(fetchUserCart(tokenVN));
+
+        })
+        .catch((err) => {
+          console.log("loi", err);
+          dispatch(updateQtyFailed(err));
+        });
+    } catch (error) {
+      dispatch(updateSizeFailed(error));
+    }
+  };
+};
+
+
+// const increaseQuantity = (id_product,size,qty) => {
+//   return {
+//     type: INCREASE_QUANTITY,
+//     payload: {id_product,size,qty},
+//   };
+// };
+
+// const decreaseQuantity = (id_product,size,qty) => {
+//   return {
+//     type: DECREASE_QUANTITY,
+//     payload: {id_product,size,qty},
+//   };
+// };
+const updateQtyFailed = (error) => {
+  return {
+    type: UPDATE_QUANTITY_FAILED,
+    payload: {
+      error,
+    },
+  };
+};
+
