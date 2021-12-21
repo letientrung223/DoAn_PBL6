@@ -85,6 +85,8 @@ const OrderDetailScreen = ({ navigation, route }) => {
             // keyExtractor={(item, index) => index.toString()}
           />
         )}
+        keyExtractor={ ( item, index ) => `${index}` }
+
       />
     </SafeAreaView>
   );

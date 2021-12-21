@@ -5,11 +5,11 @@ import {
 } from "./actionType";
 import axios from "axios";
 
-export const fetchProductList = (selectedBrandIndex) => {
+export const fetchProductList = (endpoints) => {
   return async (dispatch) => {
     dispatch(fetchProducts())
     try {
-      axios.get('https://shop-pbl6.herokuapp.com/api/v1/products/').then(response => {
+      axios.get(`https://shop-pbl6.herokuapp.com/api/v1/products/${endpoints}`).then(response => {
         //console.log(response);
         const products = response.data.data.data;
         

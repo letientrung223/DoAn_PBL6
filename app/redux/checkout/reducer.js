@@ -10,7 +10,7 @@ const initialState = {
   id_order:"",
   order:"",
 };
-
+import {Alert} from 'react-native'
 export const createOrderReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case CREATE_ORDER: {
@@ -24,7 +24,7 @@ export const createOrderReducer = (state = initialState, action = {}) => {
     }
     case CREATE_ORDER_SUCCESS: {
      
-      
+      Alert.alert('Đặt hàng thành công, tiến hành thanh toán')
       return {
         ...state,
         loading: false,

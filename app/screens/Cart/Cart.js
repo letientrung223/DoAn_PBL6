@@ -119,7 +119,10 @@ const Cart = ({ navigation }) => {
         contentContainerStyle={{ paddingBottom: 80 }}
         data={userCart}
         renderItem={({ item }) => <CartCard item={item}
-        keyExtractor={(item) => item._id} />}
+        
+        />}
+        keyExtractor={ ( item, index ) => `${index}` }
+
         ListFooterComponentStyle={{ paddingHorizontal: 20, marginTop: 20 }}
         ListFooterComponent={() => (
           <View>

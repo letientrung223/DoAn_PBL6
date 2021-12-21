@@ -181,9 +181,8 @@ const Order = ({ navigation }) => {
         <FlatList
           showsVerticalScrollIndicator={false}
           data={ordersList}
-          renderItem={({ item }) => <Card order={item} 
-          // keyExtractor={(item, index) => index.toString()}
-          />}
+          renderItem={({ item }) => <Card order={item} />}
+          keyExtractor={ ( item, index ) => `${index}` }
         />
       </SafeAreaView>
     </ScrollView>

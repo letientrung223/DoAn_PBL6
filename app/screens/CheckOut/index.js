@@ -100,6 +100,8 @@ const CheckOut = ({ navigation, route }) => {
         renderItem={({ item }) => (
           <CartCard item={item} keyExtractor={(item) => item._id} />
         )}
+        keyExtractor={ ( item, index ) => `${index}` }
+
       />
       {/* ===== */}
       <View style={styles.root}>

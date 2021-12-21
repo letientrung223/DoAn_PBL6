@@ -4,6 +4,7 @@ import {
   CREATE_ORDER_FAILED,
 } from "./actionType";
 
+import {fetchUserCart} from "../../redux/cart/action"
 import axios from "axios";
 import {getCheckOutSession} from "../checkoutsession/action"
 export const postCheckOutOrder = (ID_cartItem, shippingAddress, tokenVN) => {
@@ -27,6 +28,9 @@ export const postCheckOutOrder = (ID_cartItem, shippingAddress, tokenVN) => {
           dispatch(getCheckOutSession(id_order,tokenVN));
           // console.log("res order ", order)
           dispatch(postCheckOutSuccess(id_order,order));
+          
+          dispatch(fetchUserCart(token));
+
         })
         .catch((err) => {
           dispatch(postCheckOutFailed(err));

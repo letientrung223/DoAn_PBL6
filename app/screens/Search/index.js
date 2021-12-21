@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState }from "react";
 import { View, Text, StyleSheet, Image,TextInput } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import COLORS from "../../consts/colors";
-
+import {SearchBar} from 'react-native-elements';
 const Search = () => {
-  return (
+
+const [searchText, setSearchText] = useState("");
+const [selectedId, setSelectedId] = useState(-1);
+const [data, setdata] = useState([])
+const [filteredData, setFilteredData] = useState([])
+
+setdata(useSelector((state) => state.homeReducer.products))
+console.log('data',data);
+return (
     <View style={styles.container}>
         <View
         style={{ marginTop: 30, flexDirection: "row", paddingHorizontal: 20,paddingBottom: 10 }}

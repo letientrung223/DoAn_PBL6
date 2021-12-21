@@ -6,14 +6,13 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  TextInput,
 } from "react-native";
 import { ScrollView, FlatList } from "react-native-gesture-handler";
 import { MaterialIcons } from "@expo/vector-icons";
 import COLORS from "../../consts/colors";
 import { FontAwesome } from "@expo/vector-icons";
 import { SecondaryButton } from "../../components/Button";
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import RadioForm from 'react-native-simple-radio-button';
 import {AddItemToCart} from "../../redux/product/action"
 import { useDispatch, useSelector } from "react-redux";
 
@@ -40,11 +39,9 @@ const DetailScreen = ({ navigation, route }) => {
 
  
   const onAddToCard = (id_product,size,qty,tokenVN) => {
-    // console.warn("Add To Card with info: Name ",id_product," + Quantity: ",qty," Size: ",size );
     dispatch(AddItemToCart(id_product,qty,size,tokenVN))
   };
   const tokenVN = useSelector((state) => state.loginReducer.tokenVN); 
-  // console.log("tokenVN: ",tokenVN);
   const item = route.params;
   const ListIMG = () => {
     return (
@@ -103,7 +100,6 @@ const DetailScreen = ({ navigation, route }) => {
             </Text>
           </View>
           <Text style={style.detailsText}>{item.description}</Text>
-          {/* ============================================================ */}
           <View style={style.radiocontainer}>
             <RadioForm
               radio_props={radio_props}
@@ -115,7 +111,6 @@ const DetailScreen = ({ navigation, route }) => {
               onPress={(vl) => {setValues(vl)}}
         />
           </View>
-          {/* ============================================================ */}
 
           <View style={style.actionBtn}>
 
@@ -123,7 +118,7 @@ const DetailScreen = ({ navigation, route }) => {
               <FontAwesome name="minus" size={25} color={COLORS.white} />
             </TouchableOpacity>
 
-            <Text style={{ fontSize: 20,color: COLORS.white }}>{count}</Text>
+            <Text style={{ fontSize: 20,color: COLORS.white,paddingHorizontal: 30}}>{count}</Text>
             
             <TouchableOpacity onPress={increase}>
               <FontAwesome name="plus" size={25} color={COLORS.white} />
@@ -177,7 +172,6 @@ const style = StyleSheet.create({
   brandBtnImgCon: {
     height: 300,
     width: 300,
-    // backgroundColor: COLORS.dark,
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
@@ -197,14 +191,12 @@ const style = StyleSheet.create({
     paddingLeft: 10,
   },
   actionBtn: {
-    width: 100,
-    height: 30,
-    borderRadius: 30,
-    paddingHorizontal: 5,
+    flex: 1,
+   
+    paddingTop: 20,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
-    marginLeft: 100,
   },
 });
 

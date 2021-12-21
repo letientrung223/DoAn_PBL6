@@ -30,23 +30,17 @@ const cardWidth = width / 2 - 20;
 const Home = ({ navigation }) => {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
   const [selectedBrandIndex, setSelectedBrandIndex] = React.useState(0);
-
+  const productList = useSelector((state) => state.homeReducer.products);  
   const dispatch = useDispatch();
 
   useEffect(() => {
-
     getListProducts();
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
-    
-    
   }, [dispatch]);
    
   const getListProducts = () => {
-    dispatch(fetchProductList());
+    dispatch(fetchProductList(""));
   };
-
-  console.log(selectedBrandIndex);
-  
   const ListCategories = () => {
     return (
       <ScrollView
@@ -58,12 +52,12 @@ const Home = ({ navigation }) => {
           <TouchableOpacity
             key={index}
             activeOpacity={0.8}
-            onPress={() => setSelectedCategoryIndex(index)}
+            onPress={() => dispatch(fetchProductList(category.id))}
           >
             <View
               style={{
                 backgroundColor:
-                  selectedCategoryIndex == index? COLORS.green : COLORS.green_dark,
+                  selectedCategoryIndex == index ? COLORS.green : COLORS.green_dark,
                 ...styles.categoryBtn,
               }}
             >
@@ -108,7 +102,8 @@ const Home = ({ navigation }) => {
           <TouchableOpacity
             key={index}
             activeOpacity={0.8}
-            onPress={() => setSelectedBrandIndex(brand.id)}
+            value = {brand.id}
+            onPress={() => dispatch(fetchProductList(brand.id))}
           >
             <View
               style={{
@@ -134,7 +129,6 @@ const Home = ({ navigation }) => {
       </ScrollView>
     );
   };
-  // ====================================================
   const Card = ({ cloth }) => {
     return (
       <TouchableHighlight
@@ -176,14 +170,8 @@ const Home = ({ navigation }) => {
       </TouchableHighlight>
     );
   };
-  // ====================================================
-
-  const productList = useSelector((state) => state.homeReducer.products);
-  console.log(productList);
-  
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
-      {/* Phan Logo va User */}
       <View style={styles.header}>
         <View>
           <View style={{ flexDirection: "row" }}>
@@ -200,7 +188,6 @@ const Home = ({ navigation }) => {
     
       </View>
       <ScrollView>
-        {/* Phan List Categories */}
         <View>
           <Text
             style={{
@@ -215,7 +202,6 @@ const Home = ({ navigation }) => {
           </Text>
           <ListCategories />
         </View>
-        {/* Phan List Brands */}
         <View>
           <Text
             style={{
