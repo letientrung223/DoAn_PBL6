@@ -138,14 +138,22 @@ const CheckOut = ({ navigation, route }) => {
             </Text>
           </View>
         </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() =>
+            navigation.navigate("CheckOutSession")
+          }
+        >
+          <View
+            style={{ ...styles.btnContainer, backgroundColor: COLORS.green }}
+          >
+            <Text style={{ ...styles.title, color: COLORS.white }}>
+              Payment
+            </Text>
+          </View>
+        </TouchableOpacity>
       </View>
 
-      {/* Topbar : nút back
-           List sp dc chọn
-           Phí vc
-           Tổng tiền thanh toán 
-           ----------------------------------------------------------------
-           Nút đặt hàng */}
     </ScrollView>
     </SafeAreaView>
   );

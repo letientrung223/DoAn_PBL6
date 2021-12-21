@@ -11,6 +11,9 @@ import {getAccountReducer,updateAccountReducer} from "./accountdetail/reducer"
 import {updatePasswordReducer} from "./changepassword/reducer"
 import {productReducer} from "./product/reducer"
 import {updateItemReducer} from "./cart/reducer"
+import {createOrderReducer} from "./checkout/reducer"
+import {checkoutSessionReducer} from "./checkoutsession/reducer"
+
 const rootReducer = combineReducers({ 
   homeReducer,
   loginReducer,
@@ -23,7 +26,9 @@ const rootReducer = combineReducers({
   updateAccountReducer,
   updatePasswordReducer,
   productReducer,
-  updateItemReducer
+  updateItemReducer,
+  createOrderReducer,
+  checkoutSessionReducer,
  });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose;

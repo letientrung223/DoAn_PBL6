@@ -1,50 +1,43 @@
 import {
-  SIGNUP_USER,
-  SIGNUP_USER_SUCCESS,
-  SIGNUP_USER_FAILED,
+  CREATE_ORDER,
+  CREATE_ORDER_SUCCESS,
+  CREATE_ORDER_FAILED,
 } from "./actionType";
-import {Alert} from "react-native"
+
 const initialState = {
   error: null,
   loading: false,
-  status:"",
-  message:"",
+  id_order:"",
+  order:"",
 };
 
-export const signupReducer = (state = initialState, action = {}) => {
+export const createOrderReducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case SIGNUP_USER: {
+    case CREATE_ORDER: {
       return {
         ...state,
         loading: true,
         error:null,
-        status:"",
-        message:""
+        id_order:"",
+        order:"",
       };
     }
-    case SIGNUP_USER_SUCCESS: {
-      Alert.alert(
-        "Success, please Login",
-      )
-      //console.log(action.payload.message)
+    case CREATE_ORDER_SUCCESS: {
+     
+      
       return {
         ...state,
         loading: false,
         error:null,
-        status:action.payload.status,
-        message:action.payload.message
-        
+        id_order:action.payload.id_order,
+        order:action.payload.order,
       };
     }
-    case SIGNUP_USER_FAILED: {
-      Alert.alert(
-        "Please Sign Up Again",
-      )
+    case CREATE_ORDER_FAILED: {
       return {
         ...state,
         loading: false,
         error: action.payload.error,
-        message:action.payload.message,
       };
     }
     default:

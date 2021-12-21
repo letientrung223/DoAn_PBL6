@@ -5,17 +5,12 @@ import {
 } from "./actionType";
 
 import axios from "axios";
-
+import {getCheckOutSession} from "../checkoutsession/action"
 export const postCheckOutOrder = (ID_cartItem, shippingAddress, tokenVN) => {
   return async (dispatch) => {
-    console.log("Tới đây rồi");
-
     dispatch(postCheckOut(ID_cartItem, shippingAddress));
-
     try {
-      const headers = {
-        Authorization: `Bearer ${tokenVN}`,
-      };
+
       const data = {
         item: ID_cartItem,
         shippingAddress: shippingAddress,
@@ -25,8 +20,13 @@ export const postCheckOutOrder = (ID_cartItem, shippingAddress, tokenVN) => {
           headers: { Authorization: `Bearer ${tokenVN}` },
         })
         .then((response) => {
-          console.log("res check out: ", response);
-          
+          //console.log("res check out: ", response);
+          const id_order = response.data.data.order._id
+          const order = response.data.data.order;
+          // console.log("tới get ")
+          dispatch(getCheckOutSession(id_order,tokenVN));
+          // console.log("res order ", order)
+          dispatch(postCheckOutSuccess(id_order,order));
         })
         .catch((err) => {
           dispatch(postCheckOutFailed(err));
@@ -37,16 +37,16 @@ export const postCheckOutOrder = (ID_cartItem, shippingAddress, tokenVN) => {
   };
 };
 
-const postCheckOut = (ID_cartItem, shippingAddress) => {
+const postCheckOut = () => {
   return {
     type: CREATE_ORDER,
   };
 };
 
-const postCheckOutSuccess = (status, message) => {
+const postCheckOutSuccess = (id_order,order) => {
   return {
     type: CREATE_ORDER_SUCCESS,
-    payload: { status, message },
+    payload: { id_order,order },
   };
 };
 

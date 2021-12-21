@@ -14,10 +14,7 @@ export const fetchOrdersList = (tokenVN) => {
       axios.get("https://shop-pbl6.herokuapp.com/api/v1/orders/",
       
       { headers: {"Authorization" : `Bearer ${tokenVN}`} }).then(response => {
-        //console.log(response);
         const orders = response.data.data.order;
-       //console.log("danh sach ben order", orders);
-
         dispatch(fetchOrdersSuccess(orders));
       }).catch(err => {
         dispatch(fetchOrdersFailed(err));

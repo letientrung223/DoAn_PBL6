@@ -45,6 +45,8 @@ const Home = ({ navigation }) => {
     dispatch(fetchProductList());
   };
 
+  console.log(selectedBrandIndex);
+  
   const ListCategories = () => {
     return (
       <ScrollView
@@ -106,7 +108,7 @@ const Home = ({ navigation }) => {
           <TouchableOpacity
             key={index}
             activeOpacity={0.8}
-            onPress={() => setSelectedBrandIndex(index)}
+            onPress={() => setSelectedBrandIndex(brand.id)}
           >
             <View
               style={{
@@ -150,11 +152,6 @@ const Home = ({ navigation }) => {
                 fontSize: 18,
                 fontWeight: "bold",
                 paddingTop: 10,
-
-                // textOverflow: "ellipsis",
-                // webkitLineClamp: 3,
-                // webkitBoxOrient: "vertical",
-                // display: "-webkit-box",
               }}  numberOfLines={1}
             >
               {cloth.name}
@@ -182,7 +179,8 @@ const Home = ({ navigation }) => {
   // ====================================================
 
   const productList = useSelector((state) => state.homeReducer.products);
-
+  console.log(productList);
+  
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       {/* Phan Logo va User */}
@@ -199,10 +197,7 @@ const Home = ({ navigation }) => {
             <Image style={styles.Logo} source={asset.common.logo} />
           </View>
         </View>
-        {/* <Image
-          source={asset.common.person}
-          style={{ height: 35, width: 35, borderRadius: 25 }}
-        /> */}
+    
       </View>
       <ScrollView>
         {/* Phan List Categories */}
@@ -235,8 +230,6 @@ const Home = ({ navigation }) => {
           </Text>
           <ListBrands />
         </View>
-        {/*Load product card */}
-        {/* //{isloading ? <ActivityIndicator/>: ( */}
         <FlatList
           showsVerticalScrollIndicator={false}
           numColumns={2}

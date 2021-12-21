@@ -16,8 +16,8 @@ const brands = [
   // {id: '3', name: '',         image:brandsassets.brand.shosio}, 
   // {id: '4', name: '',         image:brandsassets.brand.shovia}, 
   // {id: '15', name: '',        image:brandsassets.brand.tyrant}, 
-  {id: '01', name: '',        image:brandsassets.brand.nike}, 
-  {id: '02', name: '',        image:brandsassets.brand.adidas},
+  {id: '?brand=Nike', name: '',        image:brandsassets.brand.nike}, 
+  {id: '?brand=Adidas', name: '',        image:brandsassets.brand.adidas},
 ];
   
   export default brands;

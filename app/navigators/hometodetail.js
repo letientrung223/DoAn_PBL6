@@ -11,7 +11,7 @@ import Cart from "../screens/Cart";
 import SignInScreen from "../screens/SignInScreen";
 import Menu from "../screens/Menu";
 import CheckOut from "../screens/CheckOut";
-
+import CheckOutSession from "../screens/CheckOutSession";
 import { Easing } from "react-native";
 const Stack = createStackNavigator();
 const config = {
@@ -59,6 +59,7 @@ export default function HomeToDetail() {
       <Stack.Screen name="Cart" component={Cart} />
       <Stack.Screen name="SignInScreen" component={SignInScreen} />
       <Stack.Screen name="CheckOut" component={CheckOut} />
+      <Stack.Screen name="CheckOutSession" component={CheckOutSession} />
     </Stack.Navigator>
   );
 }
