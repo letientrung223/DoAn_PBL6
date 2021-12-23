@@ -1,40 +1,151 @@
-import React, { useState }from "react";
-import { View, Text, StyleSheet, Image,TextInput } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TextInput,
+  Dimensions,
+} from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import {
+  FlatList,
+  TouchableOpacity,TouchableHighlight
+} from "react-native-gesture-handler";
 import COLORS from "../../consts/colors";
-import {SearchBar} from 'react-native-elements';
-const Search = () => {
+import { fetchProductList } from "../../redux/home/action";
+import { useDispatch, useSelector } from "react-redux";
+const { width } = Dimensions.get("screen");
+// const cardWidth = width / 2 - 20;
+const Search = ({ navigation}) => {
+  const [searchText, setSearchText] = useState("");
+  const [filteredData, setFilteredData] = useState("");
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    getListProducts();
+  }, [dispatch]);
 
-const [searchText, setSearchText] = useState("");
-const [selectedId, setSelectedId] = useState(-1);
-const [data, setdata] = useState([])
-const [filteredData, setFilteredData] = useState([])
+  const getListProducts = () => {
+    dispatch(fetchProductList(""));
+  };
+  const productList = useSelector((state) => state.homeReducer.products);
 
-setdata(useSelector((state) => state.homeReducer.products))
-console.log('data',data);
-return (
+  const TK = (text) => {
+    text = text.toUpperCase();
+    console.log(text);
+    text.toUpperCase()
+    let filteredData = productList.filter((item) => {
+      return item.name.includes(text);
+    });
+    // let filteredDataBrand = productList.filter((item) => {
+    //   return item.brand.includes(text);
+    // });
+    
+    console.log("trong func ",filteredData);
+
+    setFilteredData({filteredData });
+  };
+  console.log("ngoai func ",filteredData.filteredData);
+
+  const Card = ({ cloth }) => {
+    return (
+      <TouchableHighlight
+        underlayColor={COLORS.white}
+        activeOpacity={0.9}
+        onPress={() => navigation.navigate("DetailScreen", cloth)}
+      >
+        <View style={styles.card}>
+          <View style={{ alignItems: "center", top: 2 }}>
+            <Image
+              source={{ uri: cloth.imageCover }}
+              style={{ height: 120, width: 130 }}
+            />
+          </View>
+          <View style={{ marginHorizontal: 20 }}>
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: "bold",
+                paddingTop: 10,
+              }}
+              numberOfLines={1}
+            >
+              {cloth.name}
+            </Text>
+            <Text style={{ fontSize: 14, color: COLORS.grey, marginTop: 2 }}>
+              {cloth.brand}
+            </Text>
+          </View>
+          <View
+            style={{
+              marginTop: 10,
+              marginHorizontal: 20,
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+              ${cloth.price}
+            </Text>
+          </View>
+        </View>
+      </TouchableHighlight>
+    );
+  };
+  return (
     <View style={styles.container}>
-        <View
-        style={{ marginTop: 30, flexDirection: "row", paddingHorizontal: 20,paddingBottom: 10 }}
+      <View
+        style={{
+          marginTop: 30,
+          flexDirection: "row",
+          paddingHorizontal: 20,
+          paddingBottom: 10,
+        }}
       >
         <View style={styles.inputContainer}>
-          <FontAwesome name="search" size={24} color={COLORS.grey} />
           <TextInput
             style={{ flex: 1, fontSize: 18 }}
             placeholder="Search...."
             marginLeft={10}
+            value={searchText}
+            onChangeText={setSearchText}
+          />
+          <FontAwesome
+            name="search"
+            size={24}
+            color={COLORS.grey}
+            onPress={() => {
+              TK(searchText);
+            }}
           />
         </View>
-        
       </View>
+      <FlatList
+        data={filteredData.filteredData?filteredData.filteredData:productList}
+        keyExtractor={(item) => `item-${item.id}`}
+        renderItem={({ item }) => <Card cloth={item} />}
+      />
+      
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop:50,
+    paddingTop: 50,
+    alignContent: "center",
     //backgroundColor:'#ff0000'
+  },
+  card: {
+    height: 220,
+    width: width,
+    marginHorizontal: 10,
+    marginBottom: 5,
+    marginTop: 20,
+    borderRadius: 15,
+    elevation: 13,
+    backgroundColor: COLORS.white,
   },
   text: {
     fontSize: 30,

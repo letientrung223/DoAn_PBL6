@@ -31,6 +31,7 @@ const Home = ({ navigation }) => {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
   const [selectedBrandIndex, setSelectedBrandIndex] = React.useState(0);
   const productList = useSelector((state) => state.homeReducer.products);  
+  // console.log(productList);
   const dispatch = useDispatch();
 
   useEffect(() => {

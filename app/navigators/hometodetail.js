@@ -12,6 +12,7 @@ import SignInScreen from "../screens/SignInScreen";
 import Menu from "../screens/Menu";
 import CheckOut from "../screens/CheckOut";
 import CheckOutSession from "../screens/CheckOutSession";
+import Search from "../screens/Search";
 import { Easing } from "react-native";
 const Stack = createStackNavigator();
 const config = {
@@ -60,6 +61,8 @@ export default function HomeToDetail() {
       <Stack.Screen name="SignInScreen" component={SignInScreen} />
       <Stack.Screen name="CheckOut" component={CheckOut} />
       <Stack.Screen name="CheckOutSession" component={CheckOutSession} />
+      <Stack.Screen name="Search" component={Search} />
+
     </Stack.Navigator>
   );
 }

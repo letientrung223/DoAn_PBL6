@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Button,
 } from "react-native";
+// import StripeCheckout from 'react-native-stripe-checkout-webview';
 import COLORS from "../../consts/colors";
 import { useDispatch, useSelector } from "react-redux";
 
