@@ -32,21 +32,19 @@ const Search = ({ navigation}) => {
   const productList = useSelector((state) => state.homeReducer.products);
 
   const TK = (text) => {
-    text = text.toUpperCase();
-    console.log(text);
-    text.toUpperCase()
+//    console.log(text);
+    text.toLowerCase()
     let filteredData = productList.filter((item) => {
-      return item.name.includes(text);
+      return item.name.toLowerCase().includes(text);
     });
-    // let filteredDataBrand = productList.filter((item) => {
-    //   return item.brand.includes(text);
-    // });
+  
     
-    console.log("trong func ",filteredData);
+    //console.log("trong func ",filteredData);
 
     setFilteredData({filteredData });
   };
-  console.log("ngoai func ",filteredData.filteredData);
+
+  //console.log("ngoai func ",filteredData.filteredData);
 
   const Card = ({ cloth }) => {
     return (
@@ -115,9 +113,7 @@ const Search = ({ navigation}) => {
             name="search"
             size={24}
             color={COLORS.grey}
-            onPress={() => {
-              TK(searchText);
-            }}
+            onPress={() => TK(searchText)}
           />
         </View>
       </View>
